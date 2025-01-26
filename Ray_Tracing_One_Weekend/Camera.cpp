@@ -63,8 +63,15 @@ Color Camera::rayColor(Ray r, int depth, const Hittable& world) const
     RaycastHit rec;
     if (world.hit(r, Interval(0.001f, INFINITY), rec))
     {
-        vec3 direction = rec.m_normal + vector3::randomUnitVector();
-        return rayColor(Ray(rec.m_point, direction), depth - 1, world) * 0.6f;
+        Ray scattered;
+        Color attenuation;
+
+        if (rec.m_material->scatter(r, rec, attenuation, scattered))
+        {
+            return rayColor(scattered, depth - 1, world) * attenuation;
+        }
+
+        return Color(0.f, 0.f, 0.f);
     }
 
     vec3 unit_direction = r.getDirection().unitVector();

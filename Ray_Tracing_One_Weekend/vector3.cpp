@@ -95,6 +95,24 @@ vector3& vector3::operator/=(float divisor)
     return *this;
 }
 
+vector3 vector3::operator*(const vector3& vector) const
+{
+    return vector3(
+        m_x * vector.m_x,
+        m_y * vector.m_y,
+        m_z * vector.m_z
+    );
+}
+
+vector3& vector3::operator*=(const vector3& vector)
+{
+    m_x *= vector.m_x;
+    m_y *= vector.m_y;
+    m_z *= vector.m_z;
+
+    return *this;
+}
+
 std::ostream& operator<<(std::ostream& os, const vector3& vec)
 {
     os << "(" << vec.m_x << ", " << vec.m_y << ", " << vec.m_z << ")";
@@ -109,6 +127,12 @@ float vector3::length() const
 float vector3::lenghtSquared() const
 {
     return m_x * m_x + m_y * m_y + m_z * m_z;
+}
+
+bool vector3::nearZero() const
+{
+    auto s = 1e-8f;
+    return (std::fabs(m_x) < s) && (std::fabs(m_y) < s) && (std::fabs(m_z) < s);
 }
 
 float vector3::dot(const vector3 other) const
@@ -168,4 +192,9 @@ vector3 vector3::randomOnHemisphere(const vector3& normal)
         return on_unit_sphere;
     else
         return -on_unit_sphere;
+}
+
+vector3 vector3::reflect(const vector3& vector, const vector3& normal)
+{
+    return vector - normal * (vector.dot(normal) * 2.f);
 }

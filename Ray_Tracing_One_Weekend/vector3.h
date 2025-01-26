@@ -27,8 +27,12 @@ public:
 	vector3 operator/(const float dividend) const;
 	vector3& operator/=(const float dividend);
 
+	vector3 operator*(const vector3& vector) const;
+	vector3& operator*=(const vector3& vector);
+
 	float length() const;
 	float lenghtSquared() const;
+	bool nearZero() const;
 	float dot(const vector3 vector) const;
 	vector3 cross(const vector3 vector) const;
 	vector3 unitVector() const;
@@ -37,6 +41,8 @@ public:
 	static vector3 random(float min, float max);
 	static vector3 randomUnitVector();
 	static vector3 randomOnHemisphere(const vector3& normal);
+	static vector3 reflect(const vector3& vector, const vector3& normal);
+
 
 private:
 	float m_x;

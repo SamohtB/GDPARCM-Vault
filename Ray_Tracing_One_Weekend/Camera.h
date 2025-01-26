@@ -1,5 +1,6 @@
 #pragma once
 #include "hittable.h"
+#include "material.h"
 #include "Utilities.h"
 
 class Camera {

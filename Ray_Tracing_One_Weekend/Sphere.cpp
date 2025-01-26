@@ -1,6 +1,7 @@
 #include "Sphere.h"
 
-Sphere::Sphere(const vec3& center, float radius) : m_center(center), m_radius(static_cast<float>(std::fmax(0, radius))) {}
+Sphere::Sphere(const vec3& center, float radius, std::shared_ptr<Material> material) 
+    : m_center(center), m_radius(static_cast<float>(std::fmax(0, radius))), m_material(material) {}
 
 bool Sphere::hit(Ray r, Interval ray_t, RaycastHit& rec) const
 {
@@ -29,6 +30,7 @@ bool Sphere::hit(Ray r, Interval ray_t, RaycastHit& rec) const
     rec.m_point = r.at(rec.m_t);
     vector3 outward_normal = (rec.m_point - m_center) / m_radius;
     rec.setFaceNormal(r, outward_normal);
+    rec.m_material = m_material;
 
     return true;
 }

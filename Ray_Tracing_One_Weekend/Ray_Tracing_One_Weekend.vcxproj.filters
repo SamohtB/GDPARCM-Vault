@@ -12,9 +12,6 @@
     <ClCompile Include="vector3.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="color.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ray.cpp">
       <Filter>Utilities</Filter>
@@ -59,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
