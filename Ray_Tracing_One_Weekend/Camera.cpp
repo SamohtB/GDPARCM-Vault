@@ -58,7 +58,8 @@ Color Camera::rayColor(Ray r, const Hittable& world) const
     RaycastHit rec;
     if (world.hit(r, Interval(0, INFINITY), rec))
     {
-        return (rec.m_normal + Color(1, 1, 1)) * 0.5f;
+        vec3 direction = vector3::randomOnHemisphere(rec.m_normal);
+        return rayColor(Ray(rec.m_point, direction), world) * 0.5f;
     }
 
     vec3 unit_direction = r.getDirection().unitVector();

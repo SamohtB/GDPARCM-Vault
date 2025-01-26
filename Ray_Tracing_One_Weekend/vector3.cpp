@@ -1,4 +1,5 @@
 #include "vector3.h"
+#include "Utilities.h"
 
 vector3::vector3() : m_x(0.0), m_y(0.0), m_z(0.0) {}
 
@@ -137,4 +138,34 @@ vector3 vector3::unitVector() const
     }
 
     return *this;
+}
+
+vector3 vector3::random() 
+{
+    return vec3(random_float(), random_float(), random_float());
+}
+
+vector3 vector3::random(float min, float max) 
+{
+    return vec3(random_float(min, max), random_float(min, max), random_float(min, max));
+}
+
+vector3 vector3::randomUnitVector()
+{
+    while (true) 
+    {
+        vector3 p = vec3::random(-1, 1);
+        float lensq = p.lenghtSquared();
+        if (1e-160 < lensq && lensq <= 1)
+            return p / sqrt(lensq);
+    }
+}
+
+vector3 vector3::randomOnHemisphere(const vector3& normal)
+{
+    vec3 on_unit_sphere = vector3::randomUnitVector();
+    if (on_unit_sphere.dot(normal) > 0.0)
+        return on_unit_sphere;
+    else
+        return -on_unit_sphere;
 }

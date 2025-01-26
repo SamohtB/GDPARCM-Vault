@@ -32,6 +32,11 @@ public:
 	float dot(const vector3 vector) const;
 	vector3 cross(const vector3 vector) const;
 	vector3 unitVector() const;
+		
+	static vector3 random();
+	static vector3 random(float min, float max);
+	static vector3 randomUnitVector();
+	static vector3 randomOnHemisphere(const vector3& normal);
 
 private:
 	float m_x;
