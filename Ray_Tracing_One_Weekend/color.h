@@ -7,7 +7,7 @@ using Color = vector3;
 class ColorUtils
 {
 public:
-	static void Write_Color(std::ostream& output, Color& pixel_color)
+	static void writeColor(std::ostream& output, Color& pixel_color)
 	{
         float r = pixel_color.x();
         float g = pixel_color.y();

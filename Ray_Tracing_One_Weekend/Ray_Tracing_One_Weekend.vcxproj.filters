@@ -28,6 +28,9 @@
     <ClCompile Include="Interval.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vector3.h">
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="Interval.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

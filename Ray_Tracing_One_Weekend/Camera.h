@@ -6,7 +6,7 @@ class Camera {
 public:
     /* Public Camera Parameters Here */
     float m_aspect_ratio = 1.0f;
-    int m_image_width = 400;
+    float m_image_width = 400.0f;
 
     void render(const Hittable& world);
 
