@@ -4,6 +4,9 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{885c15c7-f1c5-41c3-9342-f34986d50a53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{800ec3b6-c932-44f4-9261-4b95036cd037}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vector3.cpp">
@@ -14,6 +17,15 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ray.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="HittableList.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Interval.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,6 +39,20 @@
     <ClInclude Include="ray.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h" />
+    <ClInclude Include="Sphere.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Hittable.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="HittableList.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Interval.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
