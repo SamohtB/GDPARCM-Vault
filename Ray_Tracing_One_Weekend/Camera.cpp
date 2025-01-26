@@ -9,14 +9,16 @@ void Camera::render(const Hittable& world)
     for (int j = 0; j < m_image_height; j++) 
     {
         std::clog << "\rScanlines remaining: " << (m_image_height - j) << ' ' << std::flush;
-        for (int i = 0; i < m_image_width; i++) 
+        for (int i = 0; i < m_image_width; i++)
         {
-            auto pixel_center = m_pixel00_loc + (m_pixel_delta_u * (float)i) + (m_pixel_delta_v * (float)j);
-            auto ray_direction = pixel_center - m_center;
-            Ray r(m_center, ray_direction);
+            Color pixel_color = Color(0.f, 0.f, 0.f);
+            for (int sample = 0; sample < m_samples_per_pixel; sample++)
+            {
+                Ray r = getRay(i, j);
+                pixel_color += rayColor(r, world);
+            }
 
-            Color pixel_color = rayColor(r, world);
-            ColorUtils::writeColor(std::cout, pixel_color);
+            ColorUtils::writeColor(std::cout, pixel_color * m_pixel_sample_scale);
         }
     }
 
@@ -27,6 +29,8 @@ void Camera::initialize()
 {
     m_image_height = int(m_image_width / m_aspect_ratio);
     m_image_height = (m_image_height < 1) ? 1 : m_image_height;
+
+    m_pixel_sample_scale = 1.0f / (float)m_samples_per_pixel;
 
     m_center = vector3(0.f, 0.f, 0.f);
 
@@ -60,4 +64,22 @@ Color Camera::rayColor(Ray r, const Hittable& world) const
     vec3 unit_direction = r.getDirection().unitVector();
     float a = (unit_direction.y() + 1.0f) * 0.5f;
     return Color(1.0f, 1.0f, 1.0f) * (1.0f - a) + Color(0.5f, 0.7f, 1.0f) * a;
+}
+
+Ray Camera::getRay(int i, int j) const 
+{
+    auto offset = sampleSquare();
+    auto pixel_sample = m_pixel00_loc
+        +  (m_pixel_delta_u * (i + offset.x()))
+        + (m_pixel_delta_v * (j + offset.y()));
+
+    auto ray_origin =m_center;
+    auto ray_direction = pixel_sample - ray_origin;
+
+    return Ray(ray_origin, ray_direction);
+}
+
+vec3 Camera::sampleSquare() const 
+{
+    return vec3(random_float() - 0.5f, random_float() - 0.5f, 0.f);
 }
