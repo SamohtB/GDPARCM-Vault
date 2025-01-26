@@ -8,6 +8,7 @@ public:
     float m_aspect_ratio = 1.0f;
     float m_image_width = 400.0f;
     int   m_samples_per_pixel = 10;
+    int   m_max_depth = 10;
 
     void render(const Hittable& world);
 
@@ -21,7 +22,7 @@ private:
 
 
     void initialize();
-    Color rayColor(Ray r, const Hittable& world) const;
+    Color rayColor(Ray r, int depth, const Hittable& world) const;
     Ray getRay(int i, int j) const;
     vec3 sampleSquare() const;
 };

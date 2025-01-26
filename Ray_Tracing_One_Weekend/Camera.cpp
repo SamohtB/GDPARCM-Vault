@@ -15,7 +15,7 @@ void Camera::render(const Hittable& world)
             for (int sample = 0; sample < m_samples_per_pixel; sample++)
             {
                 Ray r = getRay(i, j);
-                pixel_color += rayColor(r, world);
+                pixel_color += rayColor(r, m_max_depth, world);
             }
 
             ColorUtils::writeColor(std::cout, pixel_color * m_pixel_sample_scale);
@@ -53,13 +53,18 @@ void Camera::initialize()
     m_pixel00_loc = viewport_upper_left + (m_pixel_delta_u + m_pixel_delta_v) * 0.5f;
 }
 
-Color Camera::rayColor(Ray r, const Hittable& world) const
+Color Camera::rayColor(Ray r, int depth, const Hittable& world) const
 {
-    RaycastHit rec;
-    if (world.hit(r, Interval(0, INFINITY), rec))
+    if (depth <= 0)
     {
-        vec3 direction = vector3::randomOnHemisphere(rec.m_normal);
-        return rayColor(Ray(rec.m_point, direction), world) * 0.5f;
+        return Color(0.f, 0.f, 0.f);
+    }
+
+    RaycastHit rec;
+    if (world.hit(r, Interval(0.001f, INFINITY), rec))
+    {
+        vec3 direction = rec.m_normal + vector3::randomUnitVector();
+        return rayColor(Ray(rec.m_point, direction), depth - 1, world) * 0.6f;
     }
 
     vec3 unit_direction = r.getDirection().unitVector();
