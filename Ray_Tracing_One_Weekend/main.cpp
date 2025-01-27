@@ -28,5 +28,14 @@ int main()
     camera.m_samples_per_pixel = 100;
     camera.m_max_depth = 50;
 
+    camera.m_vfov = 20.0f;
+    camera.m_look_from = vector3(-2, 2, 1);
+    camera.m_look_at = vector3(0, 0, -1);
+    camera.m_vup = vec3(0, 1, 0);
+
+    camera.m_defocus_angle = 10.0f;
+    camera.m_focus_dist = 3.4f;
+
+
     camera.render(world);
 }

@@ -31,7 +31,7 @@ public:
 	vector3& operator*=(const vector3& vector);
 
 	float length() const;
-	float lenghtSquared() const;
+	float lengthSquared() const;
 	bool nearZero() const;
 	float dot(const vector3 vector) const;
 	vector3 cross(const vector3 vector) const;
@@ -43,6 +43,7 @@ public:
 	static vector3 randomOnHemisphere(const vector3& normal);
 	static vector3 reflect(const vector3& vector, const vector3& normal);
 	static vector3 refract(const vector3& uv, const vector3& n, float etai_over_eta);
+	static vector3 randomInUnitDisk();
 
 private:
 	float m_x;

@@ -124,7 +124,7 @@ float vector3::length() const
     return std::sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
 }
 
-float vector3::lenghtSquared() const
+float vector3::lengthSquared() const
 {
     return m_x * m_x + m_y * m_y + m_z * m_z;
 }
@@ -179,7 +179,7 @@ vector3 vector3::randomUnitVector()
     while (true) 
     {
         vector3 p = vec3::random(-1, 1);
-        float lensq = p.lenghtSquared();
+        float lensq = p.lengthSquared();
         if (1e-160 < lensq && lensq <= 1)
             return p / sqrt(lensq);
     }
@@ -203,6 +203,16 @@ vector3 vector3::refract(const vector3& uv, const vector3& n, float etai_over_et
 {
     float cos_theta = std::fmin(-uv.dot(n), 1.0f);
     vec3 r_out_perp = (uv + n * cos_theta) * etai_over_eta;
-    vec3 r_out_parallel = n * (float) -std::sqrt(std::fabs(1.0 - r_out_perp.lenghtSquared()));
+    vec3 r_out_parallel = n * (float) -std::sqrt(std::fabs(1.0 - r_out_perp.lengthSquared()));
     return r_out_perp + r_out_parallel;
+}
+
+vector3 vector3::randomInUnitDisk()
+{
+    while (true) 
+    {
+        vector3 point = vector3(random_float(-1.f, 1.f), random_float(-1.f, 1.f), 0.f);
+        if (point.lengthSquared() < 1.f)
+            return point;
+    }
 }

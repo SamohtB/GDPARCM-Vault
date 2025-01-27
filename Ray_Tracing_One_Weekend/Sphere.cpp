@@ -6,9 +6,9 @@ Sphere::Sphere(const vec3& center, float radius, std::shared_ptr<Material> mater
 bool Sphere::hit(Ray r, Interval ray_t, RaycastHit& rec) const
 {
     vec3 oc = m_center - r.getOrigin();
-    float a = r.getDirection().lenghtSquared();
+    float a = r.getDirection().lengthSquared();
     float h = r.getDirection().dot(oc);
-    float c = oc.lenghtSquared() - m_radius * m_radius;
+    float c = oc.lengthSquared() - m_radius * m_radius;
     float discriminant = h * h - a * c;
 
     if (discriminant < 0)
