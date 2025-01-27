@@ -13,12 +13,12 @@ public:
     vec3 m_normal;
     std::shared_ptr<Material> m_material;
     float m_t;
-    bool m_isFrontFace;
+    bool m_is_front_face;
 
     void setFaceNormal(Ray r, const vec3& outward_normal)
     {
-        m_isFrontFace = r.getDirection().dot(outward_normal) < 0;
-        m_normal = m_isFrontFace ? outward_normal : -outward_normal;
+        m_is_front_face = r.getDirection().dot(outward_normal) < 0;
+        m_normal = m_is_front_face ? outward_normal : -outward_normal;
     }
 
 };

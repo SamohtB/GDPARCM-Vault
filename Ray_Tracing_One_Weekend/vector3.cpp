@@ -198,3 +198,11 @@ vector3 vector3::reflect(const vector3& vector, const vector3& normal)
 {
     return vector - normal * (vector.dot(normal) * 2.f);
 }
+
+vector3 vector3::refract(const vector3& uv, const vector3& n, float etai_over_eta)
+{
+    float cos_theta = std::fmin(-uv.dot(n), 1.0f);
+    vec3 r_out_perp = (uv + n * cos_theta) * etai_over_eta;
+    vec3 r_out_parallel = n * (float) -std::sqrt(std::fabs(1.0 - r_out_perp.lenghtSquared()));
+    return r_out_perp + r_out_parallel;
+}

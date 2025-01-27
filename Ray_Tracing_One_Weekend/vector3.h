@@ -42,7 +42,7 @@ public:
 	static vector3 randomUnitVector();
 	static vector3 randomOnHemisphere(const vector3& normal);
 	static vector3 reflect(const vector3& vector, const vector3& normal);
-
+	static vector3 refract(const vector3& uv, const vector3& n, float etai_over_eta);
 
 private:
 	float m_x;
