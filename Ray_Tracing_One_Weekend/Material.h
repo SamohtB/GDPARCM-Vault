@@ -69,7 +69,7 @@ public:
         bool cannot_refract = ri * sin_theta > 1.0f;
         vec3 direction;
 
-        if (cannot_refract || reflectance(cos_theta, ri) > random_float())
+        if (cannot_refract || reflectance(cos_theta, ri) > RANDOM_FLOAT())
             direction = vector3::reflect(unit_direction, rec.m_normal);
         else
             direction = vector3::refract(unit_direction, rec.m_normal, ri);

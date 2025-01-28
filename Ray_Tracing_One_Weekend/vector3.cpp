@@ -166,12 +166,12 @@ vector3 vector3::unitVector() const
 
 vector3 vector3::random() 
 {
-    return vec3(random_float(), random_float(), random_float());
+    return vec3(RANDOM_FLOAT(), RANDOM_FLOAT(), RANDOM_FLOAT());
 }
 
 vector3 vector3::random(float min, float max) 
 {
-    return vec3(random_float(min, max), random_float(min, max), random_float(min, max));
+    return vec3(RANDOM_FLOAT(min, max), RANDOM_FLOAT(min, max), RANDOM_FLOAT(min, max));
 }
 
 vector3 vector3::randomUnitVector()
@@ -211,7 +211,7 @@ vector3 vector3::randomInUnitDisk()
 {
     while (true) 
     {
-        vector3 point = vector3(random_float(-1.f, 1.f), random_float(-1.f, 1.f), 0.f);
+        vector3 point = vector3(RANDOM_FLOAT(-1.f, 1.f), RANDOM_FLOAT(-1.f, 1.f), 0.f);
         if (point.lengthSquared() < 1.f)
             return point;
     }

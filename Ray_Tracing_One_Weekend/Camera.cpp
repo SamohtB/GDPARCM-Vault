@@ -104,7 +104,7 @@ Ray Camera::getRay(int i, int j)
 
 vector3 Camera::sampleSquare() const 
 {
-    return vector3(random_float() - 0.5f, random_float() - 0.5f, 0.f);
+    return vector3(RANDOM_FLOAT() - 0.5f, RANDOM_FLOAT() - 0.5f, 0.f);
 }
 
 vector3 Camera::defocusDiskSample()
