@@ -18,10 +18,12 @@ void Camera::render(const Hittable& world)
                 pixel_color += rayColor(r, m_max_depth, world);
             }
 
-            ColorUtils::writeColor(std::cout, pixel_color * m_pixel_sample_scale);
+            this->m_output_image->setPixel(i, j, pixel_color.x(), pixel_color.y(), pixel_color.z(), m_samples_per_pixel);
         }
     }
 
+    cv::String file_name = "_Image_Render.png";
+    this->m_output_image->saveImage(file_name);
     std::clog << "\rDone.                 \n";
 }
 
@@ -29,6 +31,8 @@ void Camera::initialize()
 {
     m_image_height = int(m_image_width / m_aspect_ratio);
     m_image_height = (m_image_height < 1) ? 1 : m_image_height;
+
+    this->m_output_image = new RTImage(m_image_width, m_image_height);
 
     m_pixel_sample_scale = 1.0f / (float)m_samples_per_pixel;
 

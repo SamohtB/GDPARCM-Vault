@@ -28,6 +28,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="RTImage.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vector3.h">
@@ -58,6 +61,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="RTImage.h">
       <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>

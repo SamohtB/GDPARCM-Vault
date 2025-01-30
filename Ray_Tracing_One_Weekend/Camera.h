@@ -3,6 +3,7 @@
 #include "material.h"
 #include "vector3.h"
 #include "Utilities.h"
+#include "RTImage.h"
 
 class Camera {
 public:
@@ -32,6 +33,7 @@ private:
     vector3  m_u, m_v, m_w;
     vector3  m_defocus_disk_u;
     vector3  m_defocus_disk_v;
+    RTImage* m_output_image;
 
     void initialize();
     Color rayColor(Ray r, int depth, const Hittable& world) const;
