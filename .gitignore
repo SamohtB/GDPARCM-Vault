@@ -35,6 +35,12 @@ bld/
 # OpenCV Stuff
 opencv/
 *.dll
+*.png
+*.ppm
+
+# SFML
+SFML-3.0.0/
+Media/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
