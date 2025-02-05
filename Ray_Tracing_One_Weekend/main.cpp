@@ -5,6 +5,7 @@
 #include "Sphere.h"
 #include "Camera.h"
 #include "Material.h"
+#include "RayTraceThread.h"
 
 int main()
 {
@@ -62,20 +63,61 @@ int main()
     auto material4 = make_shared<Metal>(Color(0.8f, 0.2f, 0.1f), 0.0f);
     world.add(make_shared<Sphere>(vector3(4.f, 1.f, -4.f), 1.0f, material4));
 
-    Camera camera;
 
-    camera.m_aspect_ratio = 1.f;
-    camera.m_image_width = 512.f;
-    camera.m_samples_per_pixel = 100;
-    camera.m_max_depth = 30;
+    float aspect_ratio = 1.f;
+    float image_width = 512.f;
+    float samples_per_pixel = 100;
+    float image_height = image_width / aspect_ratio;
+    int depth = 30;
 
-    camera.m_vfov = 60.0f;
-    camera.m_look_from = vector3(13, 2, 3);
-    camera.m_look_at = vector3(0, 0, 0);
-    camera.m_vup = vec3(0, 1, 0);
+    Camera camera(aspect_ratio, image_width, samples_per_pixel, depth, 
+        60.0f,                  //vfov 
+        vector3(13, 2, 3),      //look from
+        vector3(0.f,0.f,0.f),   //look at
+        vector3(0.f, 1.f, 0.f), //vup 
+        0.6f,                   //defocus angle
+        10.0f                   //focus distance
+    );
 
-    camera.m_defocus_angle = 0.6f;
-    camera.m_focus_dist = 10.0f;
+    RTImage image(image_width, image_height);
 
-    camera.render(world);
+    std::vector<RayTraceThread*> threadList;
+    int core_count = 32;
+    int lines_per_core = image_height / core_count;
+    
+    int row_start = 0;
+    int row_end = lines_per_core;
+
+    std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+
+    for (int i = 0; i < core_count; i++)
+    {
+        RayTraceThread* thread = new RayTraceThread(world, &camera, &image, row_start, 
+            row_end, image_width, samples_per_pixel, depth);
+        thread->start();
+        threadList.push_back(thread);
+
+        row_start += lines_per_core;
+        row_end += lines_per_core;
+    }
+
+    bool is_scanning = true;
+
+    while (is_scanning)
+    {
+        for (int i = 0; i < threadList.size(); i++)
+        {
+            is_scanning = false;
+            if (threadList[i]->isRunning())
+            {
+                is_scanning = true;
+                break;
+            }
+        }
+
+        IETThread::sleep(100);
+    }
+
+    threadList[0]->writeImage();
+
 }

@@ -1,5 +1,6 @@
 #include "RTImage.h"
 #include "Interval.h"
+#include <mutex>
 
 RTImage::RTImage(const int image_width, const int image_height) : m_image_width(image_width), m_image_height(image_height)
 {

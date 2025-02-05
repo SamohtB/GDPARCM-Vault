@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="HittableList.cpp" />
+    <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ray.cpp" />
+    <ClCompile Include="RayTraceThread.cpp" />
     <ClCompile Include="RTImage.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="vector3.cpp" />
@@ -153,9 +155,11 @@
     <ClInclude Include="color.h" />
     <ClInclude Include="Hittable.h" />
     <ClInclude Include="HittableList.h" />
+    <ClInclude Include="IETThread.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="ray.h" />
+    <ClInclude Include="RayTraceThread.h" />
     <ClInclude Include="RTImage.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Utilities.h" />
