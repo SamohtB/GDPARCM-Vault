@@ -9,14 +9,17 @@
 class RayTraceThread : public IETThread
 {
 public:
-	RayTraceThread(const Hittable& world, Camera* camera, RTImage* output_image, 
-		int row_start, int row_end, int column_count, int samples_per_pixel, 
-		int depth);
+	RayTraceThread(const Hittable& world, Camera* camera, int row_start, 
+		int row_end, int column_count, int samples_per_pixel, int depth);
 	~RayTraceThread();
 
 	void run() override;
 	bool isRunning();
+
 	void writeImage();
+	cv::Mat getImageData();
+	int getRowStart();
+	int getRowEnd();
 
 private:
 	bool m_is_running = false;

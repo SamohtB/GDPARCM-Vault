@@ -34,3 +34,8 @@ void RTImage::saveImage(cv::String& file_name) const
 {
 	cv::imwrite(file_name, *this->m_pixels);
 }
+
+cv::Mat RTImage::getPixels() const
+{
+	return this->m_pixels->clone();
+}

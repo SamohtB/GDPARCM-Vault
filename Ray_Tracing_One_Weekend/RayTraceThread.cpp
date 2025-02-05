@@ -1,9 +1,12 @@
 #include "RayTraceThread.h"
 
-RayTraceThread::RayTraceThread(const Hittable& world, Camera* camera, RTImage* output_image,
-	int row_start,	int row_end, int column_count, int samples_per_pixel, int depth) : IETThread(),
-	m_camera(camera), m_world(world), m_output_image(output_image), m_row_start(row_start), m_row_end(row_end), m_column_count(column_count),
-	m_samples_per_pixel(samples_per_pixel), m_depth(depth) {}
+RayTraceThread::RayTraceThread(const Hittable& world, Camera* camera, int row_start, int row_end, 
+	int column_count, int samples_per_pixel, int depth) : IETThread(),
+	m_camera(camera), m_world(world), m_row_start(row_start), m_row_end(row_end), m_column_count(column_count),
+	m_samples_per_pixel(samples_per_pixel), m_depth(depth) 
+{
+	this->m_output_image = new RTImage(column_count, column_count);
+}
 
 RayTraceThread::~RayTraceThread() {}
 
@@ -38,4 +41,19 @@ void RayTraceThread::writeImage()
 {
 	cv::String file_name = "_Image_Render.png";
 	this->m_output_image->saveImage(file_name);
+}
+
+cv::Mat RayTraceThread::getImageData()
+{
+	return this->m_output_image->getPixels();
+}
+
+int RayTraceThread::getRowStart()
+{
+	return this->m_row_start;
+}
+
+int RayTraceThread::getRowEnd()
+{
+	return this->m_row_end;
 }

@@ -79,10 +79,8 @@ int main()
         10.0f                   //focus distance
     );
 
-    RTImage image(image_width, image_height);
-
-    std::vector<RayTraceThread*> threadList;
-    int core_count = 32;
+    std::vector<RayTraceThread*> thread_list;
+    int core_count = 16;
     int lines_per_core = image_height / core_count;
     
     int row_start = 0;
@@ -92,10 +90,10 @@ int main()
 
     for (int i = 0; i < core_count; i++)
     {
-        RayTraceThread* thread = new RayTraceThread(world, &camera, &image, row_start, 
+        RayTraceThread* thread = new RayTraceThread(world, &camera, row_start, 
             row_end, image_width, samples_per_pixel, depth);
         thread->start();
-        threadList.push_back(thread);
+        thread_list.push_back(thread);
 
         row_start += lines_per_core;
         row_end += lines_per_core;
@@ -105,10 +103,10 @@ int main()
 
     while (is_scanning)
     {
-        for (int i = 0; i < threadList.size(); i++)
+        for (int i = 0; i < thread_list.size(); i++)
         {
             is_scanning = false;
-            if (threadList[i]->isRunning())
+            if (thread_list[i]->isRunning())
             {
                 is_scanning = true;
                 break;
@@ -118,6 +116,18 @@ int main()
         IETThread::sleep(100);
     }
 
-    threadList[0]->writeImage();
+    cv::Mat image_container = cv::Mat::zeros(image_height, image_width, CV_8UC3);
+
+    for (int i = 0; i < thread_list.size(); i++)
+    {
+        cv::Mat thread_image = thread_list[i]->getImageData();
+
+        int row_start = thread_list[i]->getRowStart();
+        int row_end = thread_list[i]->getRowEnd();
+
+        cv::bitwise_or(thread_image, image_container, image_container);
+    }
+    cv::String file_name = "_Image_Render.png";
+    cv::imwrite(file_name, image_container);
 
 }

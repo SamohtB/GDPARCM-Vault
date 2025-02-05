@@ -8,6 +8,7 @@ public:
 	RTImage(const int image_width, const int image_height);
 	void setPixel(int x, int y, float r, float g, float b, int samples_per_pixel);
 	void saveImage(cv::String& file_name) const;
+	cv::Mat getPixels() const;
 
 private:
 	std::unique_ptr<cv::Mat> m_pixels;
