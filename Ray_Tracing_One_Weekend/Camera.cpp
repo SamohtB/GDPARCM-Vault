@@ -1,26 +1,23 @@
 #include "Camera.h"
 
-Camera::Camera(float aspect_ratio, float image_width, int samples_per_pixel,
-    int max_depth, float vfov, vector3 look_from, vector3 look_at, vector3 vup,
-    float defocus_angle, float focus_dist) : m_defocus_angle(defocus_angle)
+Camera::Camera(
+    int image_width, int image_height, int samples_per_pixel, int max_depth, float fov, 
+    float focus_distance, float defocus_angle, vec3 look_from, vec3 look_at, vec3 up) 
+    : m_defocus_angle(defocus_angle)
 {
-    m_image_height = int(image_width / aspect_ratio);
-    m_image_height = (m_image_height < 1) ? 1 : m_image_height;
-
-    this->m_output_image = new RTImage(image_width, m_image_height);
-
-    m_pixel_sample_scale = 1.0f / (float)samples_per_pixel;
+    this->m_output_image = new RTImage(image_width, image_height);
 
     m_center = look_from;
 
     // Determine viewport dimensions.
-    float theta = degrees_to_radians(vfov);
+    float theta = degrees_to_radians(fov);
     float h = std::tan(theta / 2.f);
-    float viewport_height = 2.f * h * focus_dist;
-    float viewport_width = viewport_height * (float(image_width) / m_image_height);
+    float viewport_height = 2.f * h * focus_distance;
+    float viewport_width = viewport_height * 
+        static_cast<float>(image_width / image_height);
 
     m_w = (look_from - look_at).unitVector();
-    m_u = vup.cross(m_w).unitVector();
+    m_u = up.cross(m_w).unitVector();
     m_v = m_w.cross(m_u);
 
     // Calculate the vectors across the horizontal and down the vertical viewport edges.
@@ -28,24 +25,22 @@ Camera::Camera(float aspect_ratio, float image_width, int samples_per_pixel,
     auto viewport_v = -m_v * viewport_height;
 
     // Calculate the horizontal and vertical delta vectors from pixel to pixel.
-    m_pixel_delta_u = viewport_u / (float)image_width;
-    m_pixel_delta_v = viewport_v / (float)m_image_height;
+    m_pixel_delta_u = viewport_u / static_cast<float>(image_width);
+    m_pixel_delta_v = viewport_v / static_cast<float>(image_height);
 
     // Calculate the location of the upper left pixel.
     auto viewport_upper_left =
-        m_center - (m_w * focus_dist) - viewport_u / 2 - viewport_v / 2;
+        m_center - (m_w * focus_distance) - viewport_u / 2 - viewport_v / 2;
     m_pixel00_loc = viewport_upper_left + (m_pixel_delta_u + m_pixel_delta_v) * 0.5f;
 
     // Calculate the camera defocus disk basis vectors.
-    auto defocus_radius = focus_dist * std::tan(degrees_to_radians(defocus_angle / 2));
+    auto defocus_radius = focus_distance * std::tan(degrees_to_radians(defocus_angle / 2));
     m_defocus_disk_u = m_u * defocus_radius;
     m_defocus_disk_v = m_v * defocus_radius;
 }
 
 void Camera::render(const Hittable& world)
 {
-    //initialize();
-
     //std::cout << "P3\n" << m_image_width << ' ' << m_image_height << "\n255\n";
 
     //for (int j = 0; j < m_image_height; j++) 
@@ -68,46 +63,6 @@ void Camera::render(const Hittable& world)
     //this->m_output_image->saveImage(file_name);
     //std::clog << "\rDone.                 \n";
 }
-
-//void Camera::initialize()
-//{
-//    m_image_height = int(m_image_width / m_aspect_ratio);
-//    m_image_height = (m_image_height < 1) ? 1 : m_image_height;
-//
-//    this->m_output_image = new RTImage(m_image_width, m_image_height);
-//
-//    m_pixel_sample_scale = 1.0f / (float)m_samples_per_pixel;
-//
-//    m_center = m_look_from;
-//
-//    // Determine viewport dimensions.
-//    float theta = degrees_to_radians(m_vfov);
-//    float h = std::tan(theta / 2.f);
-//    float viewport_height = 2.f * h * m_focus_dist;
-//    float viewport_width = viewport_height * (float(m_image_width) / m_image_height);
-//
-//    m_w = (m_look_from - m_look_at).unitVector();
-//    m_u = m_vup.cross(m_w).unitVector();
-//    m_v = m_w.cross(m_u);
-//
-//    // Calculate the vectors across the horizontal and down the vertical viewport edges.
-//    auto viewport_u = m_u * viewport_width;
-//    auto viewport_v = -m_v * viewport_height;
-//
-//    // Calculate the horizontal and vertical delta vectors from pixel to pixel.
-//    m_pixel_delta_u = viewport_u / (float)m_image_width;
-//    m_pixel_delta_v = viewport_v / (float)m_image_height;
-//
-//    // Calculate the location of the upper left pixel.
-//    auto viewport_upper_left =
-//        m_center - (m_w * m_focus_dist) - viewport_u / 2 - viewport_v / 2;
-//    m_pixel00_loc = viewport_upper_left + (m_pixel_delta_u + m_pixel_delta_v) * 0.5f;
-//
-//    // Calculate the camera defocus disk basis vectors.
-//    auto defocus_radius = m_focus_dist * std::tan(degrees_to_radians(m_defocus_angle / 2));
-//    m_defocus_disk_u = m_u * defocus_radius;
-//    m_defocus_disk_v = m_v * defocus_radius;
-//}
 
 Color Camera::rayColor(Ray r, int depth, const Hittable& world) const
 {
