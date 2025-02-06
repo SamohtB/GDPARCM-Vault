@@ -144,6 +144,7 @@
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ProgressTracker.cpp" />
     <ClCompile Include="ray.cpp" />
     <ClCompile Include="RayTraceThread.cpp" />
     <ClCompile Include="RTImage.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="IETThread.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="ProgressTracker.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="RayTraceThread.h" />
     <ClInclude Include="RTImage.h" />

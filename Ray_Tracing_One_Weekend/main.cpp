@@ -1,11 +1,13 @@
-#include "Utilities.h"
+#include <atomic>
 
+#include "Utilities.h"
 #include "Hittable.h"
 #include "HittableList.h"
 #include "Sphere.h"
 #include "Camera.h"
 #include "Material.h"
 #include "RayTraceThread.h"
+#include "ProgressTracker.h"
 
 int main()
 {
@@ -69,6 +71,8 @@ int main()
     int image_height = static_cast<int> (image_width / aspect_ratio);
     int depth = 30;
 
+    ProgressTracker::initialize(image_height);
+
     /* camera properties */
     Camera camera(image_width, image_height, samples_per_pixel, depth,
         60.0f,                  // fov
@@ -85,8 +89,6 @@ int main()
     
     int image_height_start = 0;
     int image_height_end = lines_per_core;
-
-    std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
     /* Thread Start */
     for (int i = 0; i < core_count; i++)
@@ -123,6 +125,8 @@ int main()
 
         IETThread::sleep(100);
     }
+
+    ProgressTracker::getInstance()->complete();
 
     /* Compile Image Data to ensure single access to output */
     cv::Mat image_container = cv::Mat::zeros(image_height, image_width, CV_8UC3);

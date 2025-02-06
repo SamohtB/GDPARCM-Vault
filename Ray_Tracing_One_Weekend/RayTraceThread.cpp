@@ -1,4 +1,5 @@
 #include "RayTraceThread.h"
+#include "ProgressTracker.h"
 
 RayTraceThread::RayTraceThread(const Hittable& world, Camera* camera, int row_start, int row_end, 
 	int column_count, int samples_per_pixel, int depth) : IETThread(),
@@ -27,6 +28,8 @@ void RayTraceThread::run()
 
 			this->m_output_image->setPixel(x, y, pixel_color.x(), pixel_color.y(), pixel_color.z(), m_samples_per_pixel);
 		}
+
+		ProgressTracker::getInstance()->update();
 	}
 
 	this->m_is_running = false;
