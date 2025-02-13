@@ -75,6 +75,8 @@ void TextureManager::loadSingleAsset(int index, IExecutionEvent* executionEvent)
     {
         if (index == file_num)
         {
+            IETThread::sleep(200.f);
+
             String path = entry.path().generic_string();
             StreamAssetLoader* assetLoader = new StreamAssetLoader(path, executionEvent);
             assetLoader->start();

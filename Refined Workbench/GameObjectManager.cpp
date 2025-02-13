@@ -47,7 +47,10 @@ void GameObjectManager::draw(sf::RenderWindow* window)
 {
     for (int i = 0; i < this->m_object_list.size(); i++)
     {
-        this->m_object_list[i]->draw(window);
+        if (this->m_object_list[i] != nullptr)
+        {
+            this->m_object_list[i]->draw(window);
+        }
     }
 }
 

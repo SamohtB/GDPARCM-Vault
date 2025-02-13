@@ -69,9 +69,6 @@
     <ClInclude Include="AGameObject.h">
       <Filter>App\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>App\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="IconDisplay.h">
       <Filter>App\Entities\IconDisplay</Filter>
     </ClInclude>
@@ -98,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="StreamAssetLoader.h">
       <Filter>App\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>App\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

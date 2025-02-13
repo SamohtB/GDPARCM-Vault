@@ -2,6 +2,7 @@
 #include "GameObjectManager.h"
 #include "TextureManager.h"
 #include "Icon.h"
+#include "Game.h"
 
 IconDisplay::IconDisplay() : AGameObject("IconDisplay") {}
 
@@ -14,13 +15,18 @@ void IconDisplay::processInput(const std::optional<sf::Event> event) {}
 
 void IconDisplay::update(sf::Time delta_time)
 {
-	this->m_ticks += delta_time.asSeconds();
+	this->m_ticks += Game::TIME_PER_FRAME.asMilliseconds();
 
 	if (this->m_streaming_type == SINGLE_STREAM && this->m_ticks > this->STREAMING_LOAD_DELAY)
 	{
 		this->m_ticks = 0.f;
-		TextureManager::getInstance()->loadSingleAsset(this->m_num_displayed, this);
-		this->m_num_displayed++;
+
+		for (int i = 0; i < 50; i++)
+		{
+			TextureManager::getInstance()->loadSingleAsset(this->m_num_displayed, this);
+			this->m_num_displayed++;
+		}
+		
 	}
 	else if (this->m_streaming_type == BATCH_LOAD && this->m_ticks > this->STREAMING_LOAD_DELAY && !this->m_started_streaming)
 	{
@@ -40,7 +46,7 @@ void IconDisplay::spawnObject()
 	this->guard.lock();	
 
 	String objectName = "Icon_" + std::to_string(this->m_icon_list.size());
-	auto icon = std::make_shared<Icon>(objectName, this->m_icon_list.size());
+	auto icon = std::make_shared<Icon>(objectName, static_cast<int>(this->m_icon_list.size()));
 	this->m_icon_list.push_back(icon);
 
 	int IMG_WIDTH = 68; int IMG_HEIGHT = 68;
