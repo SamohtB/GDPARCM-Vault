@@ -8,6 +8,7 @@ using TextureList = std::vector<TexturePtr>;
 using TextureTable = std::unordered_map<String, TextureList>;
 
 class IExecutionEvent;
+class ThreadPool;
 
 class TextureManager
 {
@@ -37,6 +38,7 @@ private:
 	TextureTable m_texture_map;
 	TextureList m_base_texture_list;
 	TextureList m_streaming_texture_list;
+	ThreadPool* m_thread_pool = nullptr;
 
 	const std::string STREAMING_PATH = "Media/Streaming/";
 	int m_streaming_asset_count = 0;

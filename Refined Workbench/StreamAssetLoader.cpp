@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 
+#include "IETThread.h"
 #include "TextureManager.h"
 #include "StringUtils.h"
 #include "IExecutionEvent.h"
@@ -12,15 +13,10 @@ StreamAssetLoader::StreamAssetLoader(String path, IExecutionEvent* executionEven
 	this->execEvent = executionEvent;
 }
 
-StreamAssetLoader::~StreamAssetLoader()
-{
-	std::cout << "Destroying stream asset loader. " << std::endl;
-}
+StreamAssetLoader::~StreamAssetLoader() {}
 
-void StreamAssetLoader::run()
+void StreamAssetLoader::onStartTask()
 {
-	std::cout << "Running stream asset loader " << std::endl;
-	//simulate loading of very large file
 	std::random_device seeder;
 	std::mt19937 engine(seeder());
 	std::uniform_int_distribution<int> dist(1000, 4000);
@@ -28,7 +24,6 @@ void StreamAssetLoader::run()
 
 	std::vector<String> tokens = StringUtils::split(path, '/');
 	String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
-
 	TextureManager::getInstance()->instantiateAsTexture(path, assetName, true);
 
 	std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;

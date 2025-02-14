@@ -32,6 +32,12 @@
     <ClCompile Include="StreamAssetLoader.cpp">
       <Filter>App\Threads</Filter>
     </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>App\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolWorkerThread.cpp">
+      <Filter>App\Threads</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -84,9 +90,6 @@
     <ClInclude Include="FPSCounter.h">
       <Filter>App\Entities\UI</Filter>
     </ClInclude>
-    <ClInclude Include="IExecutionEvent.h">
-      <Filter>App\Entities\IconDisplay</Filter>
-    </ClInclude>
     <ClInclude Include="StringUtils.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -98,6 +101,18 @@
     </ClInclude>
     <ClInclude Include="GameObjectManager.h">
       <Filter>App\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>App\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="IExecutionEvent.h">
+      <Filter>App\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorkerAction.h">
+      <Filter>App\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolWorkerThread.h">
+      <Filter>App\Threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

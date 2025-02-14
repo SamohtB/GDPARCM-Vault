@@ -20,13 +20,8 @@ void IconDisplay::update(sf::Time delta_time)
 	if (this->m_streaming_type == SINGLE_STREAM && this->m_ticks > this->STREAMING_LOAD_DELAY)
 	{
 		this->m_ticks = 0.f;
-
-		for (int i = 0; i < 50; i++)
-		{
-			TextureManager::getInstance()->loadSingleAsset(this->m_num_displayed, this);
-			this->m_num_displayed++;
-		}
-		
+		TextureManager::getInstance()->loadSingleAsset(this->m_num_displayed, this);
+		this->m_num_displayed++;
 	}
 	else if (this->m_streaming_type == BATCH_LOAD && this->m_ticks > this->STREAMING_LOAD_DELAY && !this->m_started_streaming)
 	{
