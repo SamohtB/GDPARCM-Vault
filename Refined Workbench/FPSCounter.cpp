@@ -36,7 +36,8 @@ void FPSCounter::updateFPS(sf::Time time_elapsed)
 	if (this->m_update_time >= sf::seconds(0.25f))
 	{
 		this->m_update_time = sf::seconds(0.0f);
-		this->m_stats_text->setString("FPS: " + std::to_string(Game::getInstance()->getFPS()) + "\n");
+		String fps = "FPS: " + std::to_string(Game::getInstance()->getFPS()) + "\n";
+		this->m_stats_text->setString(fps);
 	}
 }
 

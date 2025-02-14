@@ -47,20 +47,17 @@ void GameObjectManager::draw(sf::RenderWindow* window)
 {
     for (int i = 0; i < this->m_object_list.size(); i++)
     {
-        if (this->m_object_list[i] != nullptr)
-        {
-            this->m_object_list[i]->draw(window);
-        }
+        this->m_object_list[i]->draw(window);
     }
 }
 
-void GameObjectManager::addGameObject(GameObjectPtr game_object)
+void GameObjectManager::addGameObject(AGameObject* game_object)
 {
     m_object_list.push_back(game_object);
     m_object_table[game_object->getName()] = game_object;
 }
 
-void GameObjectManager::deleteObject(GameObjectPtr game_object)
+void GameObjectManager::deleteObject(AGameObject* game_object)
 {
     auto it = m_object_table.find(game_object->getName());
     if (it == m_object_table.end())
@@ -70,7 +67,7 @@ void GameObjectManager::deleteObject(GameObjectPtr game_object)
     }
 
     auto objIt = std::find_if(m_object_list.begin(), m_object_list.end(),
-        [&](const std::shared_ptr<AGameObject>& obj) { return obj == game_object; });
+        [&](AGameObject* obj) { return obj == game_object; });
     
     if (objIt != m_object_list.end()) 
     {
@@ -90,7 +87,7 @@ void GameObjectManager::deleteObjectByName(String name)
     }
 
     auto objIt = std::find_if(m_object_list.begin(), m_object_list.end(),
-        [&](const std::shared_ptr<AGameObject>& obj) { return obj->getName() == name; });
+        [&](AGameObject* obj) { return obj->getName() == name; });
 
     if (objIt != m_object_list.end())
     {
@@ -106,7 +103,7 @@ void GameObjectManager::clearAllObjects()
     this->m_object_list.clear();
 }
 
-GameObjectPtr GameObjectManager::findObjectByName(String name)
+AGameObject* GameObjectManager::findObjectByName(String name)
 {
     auto it = m_object_table.find(name);
     return (it != m_object_table.end()) ? it->second : nullptr;

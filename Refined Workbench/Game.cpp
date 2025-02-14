@@ -21,13 +21,13 @@ Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "PS2 Batch
 
 	TextureManager::getInstance()->loadFromAssetList();
 
-	auto background = std::make_shared<Background>("BGObject");
+	auto background = new Background("BGObject");
 	GameObjectManager::getInstance()->addGameObject(background);
 
-	auto display = std::make_shared<IconDisplay>();
+	auto display = new IconDisplay();
 	GameObjectManager::getInstance()->addGameObject(display);
 
-	auto counter = std::make_shared<FPSCounter>();
+	auto counter = new FPSCounter();
 	GameObjectManager::getInstance()->addGameObject(counter);
 }
 

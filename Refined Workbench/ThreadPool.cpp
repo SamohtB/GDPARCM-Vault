@@ -51,6 +51,8 @@ void ThreadPool::run()
 				worker_thread->assignTask(this->m_pending_actions.front());
 				worker_thread->start();
 				this->m_pending_actions.pop();
+
+				std::cout << this->m_pending_actions.size() << " pending actions" << std::endl;
 			}
 		}
 	}

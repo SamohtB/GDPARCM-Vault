@@ -41,7 +41,7 @@ void IconDisplay::spawnObject()
 	this->guard.lock();	
 
 	String objectName = "Icon_" + std::to_string(this->m_icon_list.size());
-	auto icon = std::make_shared<Icon>(objectName, static_cast<int>(this->m_icon_list.size()));
+	auto icon = new Icon(objectName, static_cast<int>(this->m_icon_list.size()));
 	this->m_icon_list.push_back(icon);
 
 	int IMG_WIDTH = 68; int IMG_HEIGHT = 68;

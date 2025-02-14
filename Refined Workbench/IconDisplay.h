@@ -16,7 +16,7 @@ public:
 	void onFinishedExecution() override;
 
 private:
-	typedef std::vector<std::shared_ptr<Icon>> IconList;
+	typedef std::vector<Icon*> IconList;
 	typedef std::mutex Mutex;
 	IconList m_icon_list;
 

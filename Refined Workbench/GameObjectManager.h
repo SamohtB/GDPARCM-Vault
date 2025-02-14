@@ -8,9 +8,8 @@
 class AGameObject;
 
 using String = std::string;
-using GameObjectPtr = std::shared_ptr<AGameObject>;
-using GameObjectList = std::vector<GameObjectPtr>;
-using GameObjectTable = std::unordered_map<String, GameObjectPtr>;
+using GameObjectList = std::vector<AGameObject*>;
+using GameObjectTable = std::unordered_map<String, AGameObject*>;
 
 class GameObjectManager
 {
@@ -23,12 +22,12 @@ public:
     void update(sf::Time delta_time);
     void draw(sf::RenderWindow* window);
 
-    void addGameObject(GameObjectPtr game_object);
-    void deleteObject(GameObjectPtr game_object);
+    void addGameObject(AGameObject* game_object);
+    void deleteObject(AGameObject* game_object);
     void deleteObjectByName(String name);
     void clearAllObjects();
 
-    GameObjectPtr findObjectByName(String name);
+    AGameObject* findObjectByName(String name);
     GameObjectList getAllObjects();
 
     int activeObjects();
