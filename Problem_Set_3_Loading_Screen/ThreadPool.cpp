@@ -53,10 +53,10 @@ void ThreadPool::run()
 {
 	while (this->m_is_running)
 	{
-		if (!m_pending_actions.empty()) continue;
+		if (m_pending_actions.empty()) continue;
 
 		this->monitor->tryEnter();
-		
+
 		PoolWorkerThread* worker_thread = this->m_inactive_threads.front();
 		this->m_inactive_threads.pop();
 		this->m_active_threads[worker_thread->getThreadID()] = worker_thread;
@@ -64,8 +64,6 @@ void ThreadPool::run()
 		worker_thread->assignTask(this->m_pending_actions.front());
 		worker_thread->start();
 		this->m_pending_actions.pop();
-
-		this->monitor->reportExit();
 	}
 }
 
@@ -79,4 +77,6 @@ void ThreadPool::onFinishedTask(int threadID)
 		this->m_active_threads.erase(threadID);
 		this->m_inactive_threads.push(worker);
 	}
+
+	this->monitor->reportExit();
 }

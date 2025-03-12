@@ -2,11 +2,18 @@
 
 #include "GameObjectManager.h"
 #include "TextureManager.h"
+#include "LevelLoader.h"
 
 Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), WINDOW_TITLE, sf::Style::Close, sf::State::Fullscreen)
 {
 	GameObjectManager::initialize();
 	TextureManager::initialize();
+
+	/* add interactive loader assets here */
+
+	/* load level */
+	LevelLoader* levelLoader = new LevelLoader(this);
+	levelLoader->start();
 }
 
 Game::~Game() 
@@ -67,14 +74,7 @@ void Game::onClose(const sf::Event::Closed&)
 	m_window.close();
 }
 
-void Game::onFinishedTask(int threadId)
+void Game::onFinishedExecution()
 {
-
+	std::cout << "Level Loaded" << std::endl;
 }
-
-
-
-
-
-
-

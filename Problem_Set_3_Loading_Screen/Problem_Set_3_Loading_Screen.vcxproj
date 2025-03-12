@@ -156,6 +156,7 @@
     <ClCompile Include="GenericMonitor.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LevelLoaderMonitor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
     <ClCompile Include="StreamAssetLoader.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="IFinishedTask.h" />
     <ClInclude Include="IWorkerAction.h" />
     <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="LevelLoaderMonitor.h" />
     <ClInclude Include="PoolWorkerThread.h" />
     <ClInclude Include="StreamAssetLoader.h" />
     <ClInclude Include="StringUtils.h" />

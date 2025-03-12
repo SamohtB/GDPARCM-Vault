@@ -45,9 +45,10 @@ void TextureManager::loadFromAssetList()
 }
 
 
-void TextureManager::storeTexture(sf::Texture* texture)
+void TextureManager::storeTexture(String assetName, sf::Texture* texture)
 {
-
+    this->m_texture_map[assetName].push_back(texture);
+    this->m_streaming_texture_list.push_back(texture);
 }
 
 sf::Texture* TextureManager::getFromTextureMap(const String assetName, int frameIndex)

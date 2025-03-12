@@ -4,13 +4,14 @@
 #include "IWorkerAction.h"
 
 class GenericMonitor;
+class LevelLoaderMonitor;
 
 class StreamAssetLoader : public IWorkerAction
 {
 private:
 	typedef std::string String;
 public:
-	StreamAssetLoader(String path, GenericMonitor* monitor);
+	StreamAssetLoader(String path, GenericMonitor* monitor, LevelLoaderMonitor* levelLoaderMonitor);
 	~StreamAssetLoader();
 
 private:
@@ -18,5 +19,6 @@ private:
 
 	String path;
 	GenericMonitor* monitor;
+	LevelLoaderMonitor* levelLoaderMonitor;
 };
 

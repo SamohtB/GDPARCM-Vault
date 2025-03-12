@@ -2,6 +2,7 @@
 
 GenericMonitor::GenericMonitor()
 {
+
 }
 
 void GenericMonitor::tryEnter()
@@ -28,4 +29,10 @@ void GenericMonitor::notifyComplete()
 	std::lock_guard<std::mutex> lock(this->lock);
 	this->isComplete = true;
 	this->condition.notify_all();
+}
+
+void GenericMonitor::open()
+{
+	std::lock_guard<std::mutex> lock(this->lock);
+	this->isComplete = true;
 }

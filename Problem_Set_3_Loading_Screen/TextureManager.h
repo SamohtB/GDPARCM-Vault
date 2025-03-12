@@ -17,7 +17,7 @@ public:
 	static void destroy();
 
 	void loadFromAssetList(); 
-	void storeTexture(sf::Texture* texture);
+	void storeTexture(String assetName, sf::Texture* texture);
 
 	sf::Texture* getFromTextureMap(const String assetName, int frameIndex);
 	int getNumFrames(const String assetName);

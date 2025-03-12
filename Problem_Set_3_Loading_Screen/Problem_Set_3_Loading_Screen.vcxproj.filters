@@ -40,6 +40,9 @@
     <ClCompile Include="ThreadPoolMonitor.cpp">
       <Filter>Monitors</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoaderMonitor.cpp">
+      <Filter>Monitors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -126,6 +129,9 @@
       <Filter>Monitors</Filter>
     </ClInclude>
     <ClInclude Include="ThreadPoolMonitor.h">
+      <Filter>Monitors</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoaderMonitor.h">
       <Filter>Monitors</Filter>
     </ClInclude>
   </ItemGroup>

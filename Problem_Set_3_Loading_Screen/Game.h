@@ -3,16 +3,16 @@
 #include <vector>
 
 #include "config.h"
-#include "IFinishedTask.h"
+#include "IExecutionEvent.h"
 
-class Game : public IFinishedTask 
+class Game : public IExecutionEvent
 {
 public:
 	Game();
 	~Game();
 
 	void run();
-	void onFinishedTask(int threadId) override;
+	void onFinishedExecution() override;
 
 private:
 	sf::RenderWindow m_window;

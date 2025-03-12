@@ -9,6 +9,7 @@ public:
     virtual void tryEnter();
     virtual void reportExit();
     virtual void notifyComplete();
+    void open();
 
 protected:
     std::mutex lock;
