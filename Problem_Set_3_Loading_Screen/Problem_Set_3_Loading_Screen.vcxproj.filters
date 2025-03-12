@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>Entities\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="IETThread.cpp">
+      <Filter>Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamAssetLoader.cpp">
+      <Filter>Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolWorkerThread.cpp">
+      <Filter>Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericMonitor.cpp">
+      <Filter>Monitors</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPoolMonitor.cpp">
+      <Filter>Monitors</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{1739a582-bda2-425e-8244-5a8643ada725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{3f6a16b4-ff35-4088-9cfd-b8f9cef1b2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{f3eae756-29f5-4a4f-8556-758e28e2112b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abstract">
+      <UniqueIdentifier>{54ed45c8-1938-4110-9a75-afb4590f1ce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{1475c9b5-6ada-481f-a5cf-f944670bba0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threads">
+      <UniqueIdentifier>{ada3ef1c-8a20-47ab-a28c-020d60cde111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monitors">
+      <UniqueIdentifier>{6b275f5f-3aa6-41bb-b6b6-86b3f53df39c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{3337e1cf-c571-460d-9479-7c7542d4e916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Background">
+      <UniqueIdentifier>{5430b2de-42f6-4a9d-8ee3-3c825631f606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\IconDisplay">
+      <UniqueIdentifier>{733e2159-7db2-444d-aee4-970045c0bf1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\UI">
+      <UniqueIdentifier>{0fe45982-cb00-4345-8407-30db00c75c30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FPSCounter.h">
+      <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="IETThread.h">
+      <Filter>Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="IExecutionEvent.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IFinishedTask.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorkerAction.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamAssetLoader.h">
+      <Filter>Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolWorkerThread.h">
+      <Filter>Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericMonitor.h">
+      <Filter>Monitors</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPoolMonitor.h">
+      <Filter>Monitors</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

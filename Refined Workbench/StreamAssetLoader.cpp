@@ -26,7 +26,7 @@ void StreamAssetLoader::onStartTask()
 	String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
 	TextureManager::getInstance()->instantiateAsTexture(path, assetName, true);
 
-	//std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
+	std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
 
 	this->execEvent->onFinishedExecution();
 	//delete after being done

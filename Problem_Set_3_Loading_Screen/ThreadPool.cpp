@@ -1,5 +1,6 @@
 #include "ThreadPool.h"
 #include "PoolWorkerThread.h"
+#include "ThreadPoolMonitor.h"
 
 ThreadPool::ThreadPool(String name, int worker_count) : m_name(name), m_worker_count(worker_count)
 {
@@ -7,17 +8,28 @@ ThreadPool::ThreadPool(String name, int worker_count) : m_name(name), m_worker_c
 	{
 		this->m_inactive_threads.push(new PoolWorkerThread(i, this));
 	}
+
+	this->monitor = new ThreadPoolMonitor(m_worker_count);
 }
 
 ThreadPool::~ThreadPool()
 {
 	this->stopScheduler();
+
+	for (auto& thread : m_active_threads)
+	{
+		delete thread.second;
+	}
+
 	this->m_active_threads.clear();
 
-	while (this->m_inactive_threads.empty() == false)
+	while (!this->m_inactive_threads.empty())
 	{
+		delete this->m_inactive_threads.front();
 		this->m_inactive_threads.pop();
 	}
+
+	delete this->monitor;
 }
 
 void ThreadPool::startScheduler()
@@ -29,6 +41,7 @@ void ThreadPool::startScheduler()
 void ThreadPool::stopScheduler()	
 {
 	this->m_is_running = false;
+	this->monitor->notifyComplete();
 }
 
 void ThreadPool::scheduleTask(IWorkerAction* action)
@@ -40,29 +53,30 @@ void ThreadPool::run()
 {
 	while (this->m_is_running)
 	{
-		if (this->m_pending_actions.empty() == false)
-		{
-			if (this->m_inactive_threads.empty() == false)
-			{
-				PoolWorkerThread* worker_thread = this->m_inactive_threads.front();
-				this->m_inactive_threads.pop();
-				this->m_active_threads[worker_thread->getThreadID()] = worker_thread;
+		if (!m_pending_actions.empty()) continue;
 
-				worker_thread->assignTask(this->m_pending_actions.front());
-				worker_thread->start();
-				this->m_pending_actions.pop();
-			}
-		}
+		this->monitor->tryEnter();
+		
+		PoolWorkerThread* worker_thread = this->m_inactive_threads.front();
+		this->m_inactive_threads.pop();
+		this->m_active_threads[worker_thread->getThreadID()] = worker_thread;
+
+		worker_thread->assignTask(this->m_pending_actions.front());
+		worker_thread->start();
+		this->m_pending_actions.pop();
+
+		this->monitor->reportExit();
 	}
 }
 
 void ThreadPool::onFinishedTask(int threadID)
 {
+	std::lock_guard<std::mutex> lock(this->workerMutex);
+
 	if (this->m_active_threads[threadID] != nullptr)
 	{
-		delete this->m_active_threads[threadID];
+		auto worker = this->m_active_threads[threadID];
 		this->m_active_threads.erase(threadID);
-
-		this->m_inactive_threads.push(new PoolWorkerThread(threadID, this));
+		this->m_inactive_threads.push(worker);
 	}
 }

@@ -38,7 +38,7 @@ TextureManager::TextureManager()
 {
     this->countStreamingAssets();
 
-    this->m_thread_pool = new ThreadPool("TexturePool", 32);
+    this->m_thread_pool = new ThreadPool("TexturePool", 24);
     this->m_thread_pool->startScheduler();
 }
 
