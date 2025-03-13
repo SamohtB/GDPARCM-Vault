@@ -33,3 +33,13 @@ sf::Vector2f AGameObject::getPosition()
 {
 	return this->m_position;
 }
+
+void AGameObject::setScale(sf::Vector2f scale)
+{
+	this->m_scale = scale;
+
+	if(this->m_sprite != nullptr)
+	{
+		this->m_sprite->setScale(scale);
+	}
+}

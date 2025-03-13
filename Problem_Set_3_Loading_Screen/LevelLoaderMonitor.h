@@ -7,7 +7,10 @@ public:
 	void reportExit() override;
 	void increment();
 
+	float getProgress();
+
 private:
 	int assetCount = 0;
+	int completedCount = 0;
 };
 

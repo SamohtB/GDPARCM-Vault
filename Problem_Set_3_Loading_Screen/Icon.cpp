@@ -6,6 +6,7 @@ Icon::Icon(String name, int texture_index) : AGameObject(name), m_texture_index(
 {
 	sf::Texture* texture = TextureManager::getInstance()->getStreamTextureFromList(texture_index);
 	this->m_sprite = new sf::Sprite(*texture);
+	this->m_sprite->setScale({ 0.132f, 0.132f });
 }
 
 Icon::~Icon() 

@@ -43,6 +43,12 @@
     <ClCompile Include="LevelLoaderMonitor.cpp">
       <Filter>Monitors</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingSprite.cpp">
+      <Filter>Entities\LoadingBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -69,14 +75,14 @@
     <Filter Include="Entities">
       <UniqueIdentifier>{3337e1cf-c571-460d-9479-7c7542d4e916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entities\Background">
-      <UniqueIdentifier>{5430b2de-42f6-4a9d-8ee3-3c825631f606}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities\IconDisplay">
-      <UniqueIdentifier>{733e2159-7db2-444d-aee4-970045c0bf1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\UI">
       <UniqueIdentifier>{0fe45982-cb00-4345-8407-30db00c75c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{e4907395-cba9-4940-87cc-379020649bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\LoadingBar">
+      <UniqueIdentifier>{d6e18c9c-e91d-4a3a-856d-e5ed84bd17b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,5 +140,16 @@
     <ClInclude Include="LevelLoaderMonitor.h">
       <Filter>Monitors</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingSprite.h">
+      <Filter>Entities\LoadingBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="FillShader.frag">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

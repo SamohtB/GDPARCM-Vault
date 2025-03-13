@@ -154,9 +154,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GenericMonitor.cpp" />
+    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelLoaderMonitor.cpp" />
+    <ClCompile Include="LoadingSprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
     <ClCompile Include="StreamAssetLoader.cpp" />
@@ -171,18 +173,36 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GenericMonitor.h" />
+    <ClInclude Include="Icon.h" />
     <ClInclude Include="IETThread.h" />
     <ClInclude Include="IExecutionEvent.h" />
     <ClInclude Include="IFinishedTask.h" />
     <ClInclude Include="IWorkerAction.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelLoaderMonitor.h" />
+    <ClInclude Include="LoadingSprite.h" />
     <ClInclude Include="PoolWorkerThread.h" />
     <ClInclude Include="StreamAssetLoader.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="ThreadPoolMonitor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="FillShader.frag">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

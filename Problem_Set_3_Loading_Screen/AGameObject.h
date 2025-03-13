@@ -19,6 +19,9 @@ public:
 	virtual void setPosition(sf::Vector2f position);
 	virtual sf::Vector2f getPosition();
 
+	virtual void setScale(sf::Vector2f scale);
+
+
 protected:
 	std::string m_name;
 	sf::Sprite* m_sprite = nullptr;

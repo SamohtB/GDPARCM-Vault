@@ -4,15 +4,20 @@
 #include "TextureManager.h"
 #include "LevelLoader.h"
 
+#include "Icon.h"
+#include "LoadingSprite.h"
+
 Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), WINDOW_TITLE, sf::Style::Close, sf::State::Fullscreen)
 {
 	GameObjectManager::initialize();
 	TextureManager::initialize();
 
-	/* add interactive loader assets here */
-
-	/* load level */
 	LevelLoader* levelLoader = new LevelLoader(this);
+
+	/* add interactive loader assets here */
+	LoadingSprite* loader = new LoadingSprite(levelLoader);
+	GameObjectManager::getInstance()->addGameObject(loader);
+
 	levelLoader->start();
 }
 
@@ -77,4 +82,11 @@ void Game::onClose(const sf::Event::Closed&)
 void Game::onFinishedExecution()
 {
 	std::cout << "Level Loaded" << std::endl;
+
+	Icon* icon = new Icon("Test", 0);
+	GameObjectManager::getInstance()->addGameObject(icon);
+
+	icon = new Icon("Test_1", 1);
+	icon->setPosition({0.0f, WINDOW_HEIGHT / 2});
+	GameObjectManager::getInstance()->addGameObject(icon);
 }

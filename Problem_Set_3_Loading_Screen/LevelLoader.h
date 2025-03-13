@@ -12,8 +12,10 @@ public:
 	LevelLoader(IExecutionEvent* executionEvent);
 	~LevelLoader();
 
+	float getProgress() const;
+
 private:
-	std::string LEVEL_ASSET_PATH = "Media/Streaming/";
+	std::string LEVEL_ASSET_PATH = "Media/UniformCard/";
 	ThreadPool* threadPool = nullptr;
 	GenericMonitor* textureMonitor = nullptr;
 	LevelLoaderMonitor* levelLoaderMonitor = nullptr;

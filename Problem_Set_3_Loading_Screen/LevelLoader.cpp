@@ -22,6 +22,11 @@ LevelLoader::~LevelLoader()
     delete this->levelLoaderMonitor;
 }
 
+float LevelLoader::getProgress() const
+{
+    return this->levelLoaderMonitor->getProgress();
+}
+
 void LevelLoader::run()
 {
 	this->threadPool->startScheduler();
