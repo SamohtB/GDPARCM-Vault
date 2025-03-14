@@ -9,7 +9,7 @@
 
 LevelLoader::LevelLoader(IExecutionEvent* executionEvent) : executionEvent(executionEvent)
 {
-	this->threadPool = new ThreadPool("Texture Pool", 16);
+	this->threadPool = new ThreadPool("Texture Pool", 8);
     this->textureMonitor = new GenericMonitor();
     this->textureMonitor->open();
     this->levelLoaderMonitor = new LevelLoaderMonitor();

@@ -10,7 +10,7 @@ IconDisplay::IconDisplay() : AGameObject("Icon Display")
     m_scaled_width = 727.0f * m_card_scale;
     m_scaled_height = 1017.0f * m_card_scale;
 
-    MAX_COLUMN = static_cast<int>(275 / MAX_ROW);
+    MAX_COLUMN = static_cast<int>(119 / MAX_ROW);
 
 	spawnAllIcons();
 
@@ -31,7 +31,7 @@ void IconDisplay::update(sf::Time delta_time)
 
     if (m_is_moving)
     {
-        float period = 60.0f;
+        float period = 20.0f;
         float t = std::fmod(this->m_ticks / period, 1.0f);
 
         offsetX = m_max_scroll * (0.5f * (1 - static_cast<float>(std::cos(t * M_PI))));
