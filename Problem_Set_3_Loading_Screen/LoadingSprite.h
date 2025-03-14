@@ -21,6 +21,10 @@ private:
 	LevelLoader* progressTracker = nullptr;
 	LoadingOrb* orb = nullptr;
 
+	float ticks = 0.0f;
+	int currentStage = 0;
+	float transitionAlpha = 0.0f;
+	const float transitionSpeed = 2.0f;
 	float maxRadius = 0.0f;
 
 	bool fadingOut = false;

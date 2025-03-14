@@ -96,11 +96,13 @@ void Game::onFinishedExecution()
 {
 	std::cout << "Level Loaded" << std::endl;
 
+	/* spawn cards */
 	IconDisplay* display = new IconDisplay();
 	GameObjectManager::getInstance()->addGameObject(display);
 
 	if (this->loader != nullptr)
 	{
+		/* adds a "press any key to continue" prompt to remove loading screen */
 		PressAnyKeyPrompt* prompt = new PressAnyKeyPrompt(this->loader);
 		GameObjectManager::getInstance()->addUIObject(prompt);
 	}

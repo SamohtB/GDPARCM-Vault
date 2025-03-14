@@ -17,8 +17,10 @@ void LoadingOrb::processInput(const std::optional<sf::Event> event)
 
 void LoadingOrb::update(sf::Time deltaTime)
 {   
+	float aspectRatio = static_cast<float>(WINDOW_WIDTH / WINDOW_HEIGHT);
 	sf::Vector2f newPosition = this->getPosition() + this->velocity * deltaTime.asSeconds();
-	float radiusX = this->radius * WINDOW_WIDTH;
+
+	float radiusX = this->radius * WINDOW_HEIGHT;
 	float radiusY = this->radius * WINDOW_HEIGHT;
 
 	if (this->progress >= 1.0f)

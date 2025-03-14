@@ -25,6 +25,7 @@ private:
 	float m_scaled_width = 0;
 	float m_scaled_height = 0;
 	float m_max_scroll = 0;
+	bool m_is_moving = false;
 
 	void spawnObject(int id);
 	void spawnAllIcons();

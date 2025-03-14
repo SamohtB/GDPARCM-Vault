@@ -17,25 +17,34 @@ IconDisplay::IconDisplay() : AGameObject("Icon Display")
     m_max_scroll = std::max(0.0f, (m_icon_list.size() / MAX_ROW) * m_scaled_width - WINDOW_WIDTH);
 }
 
-void IconDisplay::processInput(const std::optional<sf::Event> event) {}
+void IconDisplay::processInput(const std::optional<sf::Event> event) 
+{
+    if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+    {
+        this->m_is_moving = true;
+    }
+}
 
 void IconDisplay::update(sf::Time delta_time)
 {
     this->m_ticks += delta_time.asSeconds();
 
-    float period = 60.0f;
-    float t = std::fmod(this->m_ticks / period, 1.0f);
+    if (m_is_moving)
+    {
+        float period = 60.0f;
+        float t = std::fmod(this->m_ticks / period, 1.0f);
 
-    offsetX = m_max_scroll * (0.5f * (1 - static_cast<float>(std::cos(t * M_PI))));
+        offsetX = m_max_scroll * (0.5f * (1 - static_cast<float>(std::cos(t * M_PI))));
 
-    for (int i = 0; i < m_icon_list.size(); ++i) {
-        int row = i / MAX_COLUMN;
-        int col = i % MAX_COLUMN;
+        for (int i = 0; i < m_icon_list.size(); ++i) {
+            int row = i / MAX_COLUMN;
+            int col = i % MAX_COLUMN;
 
-        float x = (col * m_scaled_width) - offsetX;
-        float y = row * m_scaled_height;
+            float x = (col * m_scaled_width) - offsetX;
+            float y = row * m_scaled_height;
 
-        m_icon_list[i]->setPosition({ x, y });
+            m_icon_list[i]->setPosition({ x, y });
+        }
     }
 }
 

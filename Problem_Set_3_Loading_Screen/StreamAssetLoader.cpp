@@ -22,7 +22,7 @@ void StreamAssetLoader::onStartTask()
 {
 	/* add random delay to loading */
 	std::uniform_int_distribution<int> dist(10000, 20000);
-	//IETThread::sleep(dist(randomEngine));
+	IETThread::sleep(dist(randomEngine));
 
 	sf::Texture* texture = new sf::Texture(path);
 

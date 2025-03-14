@@ -42,6 +42,8 @@ void LoadingSprite::processInput(const std::optional<sf::Event> event)
 
 void LoadingSprite::update(sf::Time deltaTime)
 {
+	this->ticks += deltaTime.asSeconds();
+
 	/* fade out */
 	if (fadingOut)
 	{
@@ -74,6 +76,21 @@ void LoadingSprite::update(sf::Time deltaTime)
 
 	/*std::cout << "Progress: " << progress * 100 << "% | Inner Radius: " << innerRadius
 		<< " | Outer Radius: " << outerRadius << std::endl;*/
+
+	if (ticks >= 30.0f)
+	{
+		ticks = 0.0f;
+
+		currentStage = (currentStage % 3) + 1;
+
+		std::string nextTextureKey = "Stage" + std::to_string(currentStage);
+		sf::Texture* nextTexture = TextureManager::getInstance()->getFromTextureMap(nextTextureKey, 0);
+
+		if (nextTexture)
+		{
+			this->m_sprite->setTexture(*nextTexture);
+		}
+	}
 }
 
 
