@@ -12,7 +12,7 @@ Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), WINDOW_TIT
 	GameObjectManager::initialize();
 	TextureManager::initialize();
 
-	LevelLoader* levelLoader = new LevelLoader(this);
+	this->levelLoader = new LevelLoader(this);
 
 	/* add interactive loader assets here */
 	LoadingSprite* loader = new LoadingSprite(levelLoader);
@@ -56,7 +56,8 @@ void Game::update(sf::Time elapsed_time)
 
 void Game::render()
 {
-	this->m_window.clear();
+	//sf::Color(173, 216, 230)
+	this->m_window.clear(sf::Color(204, 179, 255));
 	GameObjectManager::getInstance()->draw(&this->m_window);
 	this->m_window.display();
 }
@@ -82,11 +83,4 @@ void Game::onClose(const sf::Event::Closed&)
 void Game::onFinishedExecution()
 {
 	std::cout << "Level Loaded" << std::endl;
-
-	Icon* icon = new Icon("Test", 0);
-	GameObjectManager::getInstance()->addGameObject(icon);
-
-	icon = new Icon("Test_1", 1);
-	icon->setPosition({0.0f, WINDOW_HEIGHT / 2});
-	GameObjectManager::getInstance()->addGameObject(icon);
 }

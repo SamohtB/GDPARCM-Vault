@@ -2,6 +2,7 @@
 #include "AGameObject.h"
 
 class LevelLoader;
+class LoadingOrb;
 
 class LoadingSprite : public AGameObject
 {
@@ -13,11 +14,11 @@ public:
 	void update(sf::Time deltaTime) override;
 	void draw(sf::RenderWindow* targetWindow) override;
 
-	void setProgressMonitor(LevelLoader* tracker);
-
 private:
 	sf::Shader* fillShader = nullptr;
 	LevelLoader* progressTracker = nullptr;
+	LoadingOrb* orb = nullptr;
 
+	float maxRadius = 0.0f;
 };
 

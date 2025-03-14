@@ -49,6 +49,9 @@
     <ClCompile Include="Icon.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingOrb.cpp">
+      <Filter>Entities\LoadingBar</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -78,11 +81,11 @@
     <Filter Include="Entities\UI">
       <UniqueIdentifier>{0fe45982-cb00-4345-8407-30db00c75c30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{e4907395-cba9-4940-87cc-379020649bd1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\LoadingBar">
       <UniqueIdentifier>{d6e18c9c-e91d-4a3a-856d-e5ed84bd17b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{e4907395-cba9-4940-87cc-379020649bd1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -146,10 +149,13 @@
     <ClInclude Include="Icon.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingOrb.h">
+      <Filter>Entities\LoadingBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="FillShader.frag">
+    <None Include="Media\Shaders\FragmentShader.frag">
       <Filter>Shaders</Filter>
-    </FxCompile>
+    </None>
   </ItemGroup>
 </Project>

@@ -158,6 +158,7 @@
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelLoaderMonitor.cpp" />
+    <ClCompile Include="LoadingOrb.cpp" />
     <ClCompile Include="LoadingSprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="IWorkerAction.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelLoaderMonitor.h" />
+    <ClInclude Include="LoadingOrb.h" />
     <ClInclude Include="LoadingSprite.h" />
     <ClInclude Include="PoolWorkerThread.h" />
     <ClInclude Include="StreamAssetLoader.h" />
@@ -189,20 +191,7 @@
     <ClInclude Include="ThreadPoolMonitor.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="FillShader.frag">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
-    </FxCompile>
+    <None Include="Media\Shaders\FragmentShader.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

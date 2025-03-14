@@ -5,6 +5,8 @@
 #include "config.h"
 #include "IExecutionEvent.h"
 
+class LevelLoader;
+
 class Game : public IExecutionEvent
 {
 public:
@@ -23,5 +25,7 @@ private:
 	void processEvents();
 
 	void onClose(const sf::Event::Closed&);
+
+	LevelLoader* levelLoader = nullptr;
 };
 

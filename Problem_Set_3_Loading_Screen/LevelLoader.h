@@ -15,7 +15,7 @@ public:
 	float getProgress() const;
 
 private:
-	std::string LEVEL_ASSET_PATH = "Media/UniformCard/";
+	std::string LEVEL_ASSET_PATH = "Media/CardArt/";
 	ThreadPool* threadPool = nullptr;
 	GenericMonitor* textureMonitor = nullptr;
 	LevelLoaderMonitor* levelLoaderMonitor = nullptr;

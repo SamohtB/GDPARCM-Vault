@@ -1,4 +1,5 @@
 #pragma once
+#include <random>
 
 #include <string>
 #include "IWorkerAction.h"
@@ -20,5 +21,8 @@ private:
 	String path;
 	GenericMonitor* monitor;
 	LevelLoaderMonitor* levelLoaderMonitor;
+
+	static std::mt19937 randomEngine;
 };
+
 

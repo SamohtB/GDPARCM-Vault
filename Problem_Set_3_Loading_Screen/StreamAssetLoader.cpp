@@ -1,6 +1,5 @@
 #include "StreamAssetLoader.h"
 #include <iostream>
-#include <random>
 
 #include "IETThread.h"
 #include "StringUtils.h"
@@ -8,6 +7,9 @@
 #include "GenericMonitor.h"
 #include "LevelLoaderMonitor.h"
 #include "TextureManager.h"
+
+
+std::mt19937 StreamAssetLoader::randomEngine(std::random_device{}());
 
 StreamAssetLoader::StreamAssetLoader(String path, GenericMonitor* monitor, LevelLoaderMonitor* levelLoaderMonitor)
 	: path(path), monitor(monitor), levelLoaderMonitor(levelLoaderMonitor)
@@ -19,17 +21,15 @@ StreamAssetLoader::~StreamAssetLoader() {}
 void StreamAssetLoader::onStartTask()
 {
 	/* add random delay to loading */
-	// move random device outside
-	std::random_device seeder;
-	std::mt19937 engine(seeder());
-	std::uniform_int_distribution<int> dist(1000, 4000);
-	IETThread::sleep(dist(engine));
+	std::uniform_int_distribution<int> dist(10000, 20000);
+	IETThread::sleep(dist(randomEngine));
 
 	sf::Texture* texture = new sf::Texture(path);
 
 	if (texture == nullptr)
 	{
 		std::cerr << "[TextureManager] No texture found for " << path << std::endl;
+		delete texture;
 	}
 	else /* Dont add if texture load fail */
 	{
