@@ -7,6 +7,7 @@
 #include "Icon.h"
 #include "IconDisplay.h"
 #include "LoadingSprite.h"
+#include "PressAnyKeyPrompt.h"
 
 Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), WINDOW_TITLE, sf::Style::Close, sf::State::Fullscreen)
 {
@@ -98,5 +99,10 @@ void Game::onFinishedExecution()
 	IconDisplay* display = new IconDisplay();
 	GameObjectManager::getInstance()->addGameObject(display);
 
-	GameObjectManager::getInstance()->deleteObject(this->loader);
+	if (this->loader != nullptr)
+	{
+		PressAnyKeyPrompt* prompt = new PressAnyKeyPrompt(this->loader);
+		GameObjectManager::getInstance()->addUIObject(prompt);
+	}
+	
 }

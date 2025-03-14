@@ -10,6 +10,10 @@ LoadingSprite::LoadingSprite(LevelLoader* tracker) : AGameObject("Loading Sprite
     sf::Texture* texture = TextureManager::getInstance()->getFromTextureMap("Stage1", 0);
     this->m_sprite = new sf::Sprite(*texture);
 
+	sf::FloatRect spriteBounds = this->m_sprite->getLocalBounds();
+	this->m_sprite->setOrigin(spriteBounds.getCenter());
+	this->m_sprite->setPosition({ WINDOW_WIDTH / 2.0f, WINDOW_HEIGHT / 2.0f });
+
     this->fillShader = new sf::Shader(L"Media/Shaders/FragmentShader.frag", sf::Shader::Type::Fragment);
 
     if (this->fillShader == nullptr)
@@ -22,8 +26,9 @@ LoadingSprite::LoadingSprite(LevelLoader* tracker) : AGameObject("Loading Sprite
 	this->orb = new LoadingOrb();
 	GameObjectManager::getInstance()->addGameObject(this->orb);
 
-	this->maxRadius = sqrt(WINDOW_WIDTH * WINDOW_WIDTH + WINDOW_HEIGHT * WINDOW_HEIGHT) / 2.0f;
+	this->maxRadius = static_cast<float>(sqrt(WINDOW_WIDTH * WINDOW_WIDTH + WINDOW_HEIGHT * WINDOW_HEIGHT)) / 2.0f;
 	this->maxRadius /= WINDOW_WIDTH;
+	this->maxRadius += this->maxRadius * 0.5f;
 }
 
 
@@ -37,6 +42,20 @@ void LoadingSprite::processInput(const std::optional<sf::Event> event)
 
 void LoadingSprite::update(sf::Time deltaTime)
 {
+	/* fade out */
+	if (fadingOut)
+	{
+		fadeAlpha -= fadeSpeed * deltaTime.asSeconds();
+
+		if (fadeAlpha <= 0)
+		{
+			fadeAlpha = 0;
+			GameObjectManager::getInstance()->deleteObject(this);
+			return;
+		}
+	}
+
+	/* loading process */
 	float progress = this->progressTracker->getProgress();
 
 	sf::Vector2f orbPosition = this->orb->getPosition();
@@ -51,6 +70,8 @@ void LoadingSprite::update(sf::Time deltaTime)
 	this->orb->setOuterRadius(outerRadius);
 	this->orb->setProgress(progress);
 
+	this->fillShader->setUniform("alpha", fadeAlpha / 255.0f);
+
 	/*std::cout << "Progress: " << progress * 100 << "% | Inner Radius: " << innerRadius
 		<< " | Outer Radius: " << outerRadius << std::endl;*/
 }
@@ -63,4 +84,9 @@ void LoadingSprite::draw(sf::RenderWindow* targetWindow)
 		targetWindow->draw(*this->m_sprite, this->fillShader);
 		//targetWindow->draw(*this->m_sprite);
 	}
+}
+
+void LoadingSprite::startFadeOut()
+{
+	this->fadingOut = true;
 }

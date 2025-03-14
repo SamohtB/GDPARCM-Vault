@@ -55,6 +55,9 @@
     <ClCompile Include="IconDisplay.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="PressAnyKeyPrompt.cpp">
+      <Filter>Entities\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="IconDisplay.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PressAnyKeyPrompt.h">
+      <Filter>Entities\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,7 @@ void LevelLoaderMonitor::reportExit()
 
 	this->completedCount++;
 	this->assetCount--;
-
+	
 	if (assetCount == 0)
 	{
 		isComplete = true;

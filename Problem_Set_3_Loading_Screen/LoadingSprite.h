@@ -14,11 +14,16 @@ public:
 	void update(sf::Time deltaTime) override;
 	void draw(sf::RenderWindow* targetWindow) override;
 
+	void startFadeOut();
+
 private:
 	sf::Shader* fillShader = nullptr;
 	LevelLoader* progressTracker = nullptr;
 	LoadingOrb* orb = nullptr;
 
 	float maxRadius = 0.0f;
-};
 
+	bool fadingOut = false;
+	float fadeAlpha = 255.0f;
+	float fadeSpeed = 150.0f;
+};

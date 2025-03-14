@@ -31,6 +31,11 @@ void GameObjectManager::processInput(const std::optional<sf::Event> event)
     {
         this->m_object_list[i]->processInput(event);
     }
+
+    for (int i = 0; i < this->m_ui_objects.size(); i++)
+    {
+        this->m_ui_objects[i]->processInput(event);
+    }
 }
 
 void GameObjectManager::update(sf::Time delta_time)
@@ -39,6 +44,11 @@ void GameObjectManager::update(sf::Time delta_time)
     {
         this->m_object_list[i]->update(delta_time);
     }
+
+    for (int i = 0; i < this->m_ui_objects.size(); i++)
+    {
+        this->m_ui_objects[i]->update(delta_time);
+    }
 }
 
 void GameObjectManager::draw(sf::RenderWindow* window)
@@ -46,6 +56,11 @@ void GameObjectManager::draw(sf::RenderWindow* window)
     for (int i = 0; i < this->m_object_list.size(); i++)
     {
         this->m_object_list[i]->draw(window);
+    }
+
+    for (int i = 0; i < this->m_ui_objects.size(); i++)
+    {
+        this->m_ui_objects[i]->draw(window);
     }
 }
 
@@ -58,6 +73,12 @@ void GameObjectManager::addGameObject(AGameObject* game_object)
 void GameObjectManager::addGameObjectBehind(AGameObject* game_object)
 {
     m_object_list.insert(m_object_list.begin(), game_object);
+    m_object_table[game_object->getName()] = game_object;
+}
+
+void GameObjectManager::addUIObject(AGameObject* game_object)
+{
+    m_ui_objects.push_back(game_object);
     m_object_table[game_object->getName()] = game_object;
 }
 
@@ -76,6 +97,12 @@ void GameObjectManager::deleteObject(AGameObject* game_object)
     if (objIt != m_object_list.end())
     {
         m_object_list.erase(objIt);
+    }
+
+    auto uiIt = std::find(m_ui_objects.begin(), m_ui_objects.end(), game_object);
+    if (uiIt != m_ui_objects.end())
+    {
+        m_ui_objects.erase(uiIt);
     }
 
     m_object_table.erase(it);
@@ -98,6 +125,14 @@ void GameObjectManager::deleteObjectByName(String name)
         m_object_list.erase(objIt);
     }
 
+    auto uiIt = std::find_if(m_ui_objects.begin(), m_ui_objects.end(),
+        [&](AGameObject* obj) { return obj->getName() == name; });
+
+    if (uiIt != m_ui_objects.end())
+    {
+        m_ui_objects.erase(uiIt);
+    }
+
     m_object_table.erase(it);
 }
 
@@ -105,6 +140,7 @@ void GameObjectManager::clearAllObjects()
 {
     this->m_object_table.clear();
     this->m_object_list.clear();
+    this->m_ui_objects.clear();
 }
 
 AGameObject* GameObjectManager::findObjectByName(String name)

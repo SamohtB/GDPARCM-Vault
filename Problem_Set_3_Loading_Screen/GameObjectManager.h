@@ -22,6 +22,7 @@ public:
 
     void addGameObject(AGameObject* game_object);
     void addGameObjectBehind(AGameObject* game_object);
+    void addUIObject(AGameObject* game_object);
     void deleteObject(AGameObject* game_object);
     void deleteObjectByName(String name);
     void clearAllObjects();
@@ -37,5 +38,6 @@ private:
     static GameObjectManager* sharedInstance;
 
     GameObjectList m_object_list;
+    GameObjectList m_ui_objects;
     GameObjectTable m_object_table;
 };

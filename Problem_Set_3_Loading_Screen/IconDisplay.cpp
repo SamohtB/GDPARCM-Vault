@@ -26,9 +26,9 @@ void IconDisplay::update(sf::Time delta_time)
     float period = 60.0f;
     float t = std::fmod(this->m_ticks / period, 1.0f);
 
-    offsetX = m_max_scroll * (0.5f * (1 - std::cos(t * M_PI)));
+    offsetX = m_max_scroll * (0.5f * (1 - static_cast<float>(std::cos(t * M_PI))));
 
-    for (size_t i = 0; i < m_icon_list.size(); ++i) {
+    for (int i = 0; i < m_icon_list.size(); ++i) {
         int row = i / MAX_COLUMN;
         int col = i % MAX_COLUMN;
 

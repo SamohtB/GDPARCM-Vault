@@ -163,6 +163,7 @@
     <ClCompile Include="LoadingSprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
+    <ClCompile Include="PressAnyKeyPrompt.cpp" />
     <ClCompile Include="StreamAssetLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="LoadingOrb.h" />
     <ClInclude Include="LoadingSprite.h" />
     <ClInclude Include="PoolWorkerThread.h" />
+    <ClInclude Include="PressAnyKeyPrompt.h" />
     <ClInclude Include="StreamAssetLoader.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TextureManager.h" />
