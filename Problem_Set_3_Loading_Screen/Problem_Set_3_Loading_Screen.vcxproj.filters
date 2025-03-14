@@ -58,6 +58,9 @@
     <ClCompile Include="PressAnyKeyPrompt.cpp">
       <Filter>Entities\UI</Filter>
     </ClCompile>
+    <ClCompile Include="EngineTime.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="PressAnyKeyPrompt.h">
       <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTime.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@ private:
 
 	int m_column_grid = 0; int m_row_grid = 0;
 	int MAX_COLUMN = 0;
-	const int MAX_ROW = 5;
+	const int MAX_ROW = 7;
 	const float SCROLL_SPEED = 500.0f;
 
 	float offsetX = 0.0f;

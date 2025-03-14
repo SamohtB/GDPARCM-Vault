@@ -2,17 +2,24 @@
 
 #include "GameObjectManager.h"
 #include "TextureManager.h"
+#include "EngineTime.h"
 #include "LevelLoader.h"
 
 #include "Icon.h"
 #include "IconDisplay.h"
 #include "LoadingSprite.h"
 #include "PressAnyKeyPrompt.h"
+#include "FPSCounter.h"
 
 Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), WINDOW_TITLE, sf::Style::Close, sf::State::Fullscreen)
 {
 	GameObjectManager::initialize();
 	TextureManager::initialize();
+	EngineTime::initialize();
+	m_window.setFramerateLimit(60);
+
+	this->fpsCounter = new FPSCounter();
+	GameObjectManager::getInstance()->addUIObject(this->fpsCounter);
 
 	/* Create Level Loader Thread*/
 	this->levelLoader = new LevelLoader(this);
@@ -36,23 +43,27 @@ Game::~Game()
 
 void Game::run()
 {
-	sf::Clock clock = sf::Clock();
-	sf::Time time_since_last_update = sf::Time::Zero;
-
 	while (this->m_window.isOpen())
 	{
-		sf::Time elapsed_time = clock.restart();
-		time_since_last_update += elapsed_time;
+		EngineTime::LogFrameStart();
 
-		while (time_since_last_update > TIME_PER_FRAME)
-		{
-			time_since_last_update -= TIME_PER_FRAME;
-
-			processEvents();
-			update(TIME_PER_FRAME);
-		}
-
+		processEvents();
+		update(sf::seconds(EngineTime::getDeltaTime()));
 		render();
+
+		EngineTime::LogFrameEnd();
+
+		frameCount++;
+		totalTime += EngineTime::getDeltaTime();
+
+		if (totalTime >= updateInterval)
+		{
+			double averageFPS = frameCount / totalTime;
+			this->fpsCounter->updateFPS(averageFPS);
+
+			frameCount = 0;
+			totalTime = 0.0;
+		}
 	}
 }
 

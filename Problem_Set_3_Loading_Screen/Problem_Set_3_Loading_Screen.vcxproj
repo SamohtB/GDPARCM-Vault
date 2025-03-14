@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
+    <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="EngineTime.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjectManager.h" />

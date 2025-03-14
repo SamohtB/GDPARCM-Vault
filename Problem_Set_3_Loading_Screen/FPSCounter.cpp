@@ -18,7 +18,6 @@ void FPSCounter::processInput(const std::optional<sf::Event> event) {}
 
 void FPSCounter::update(sf::Time delta_time)
 {
-	this->updateFPS(delta_time);
 }
 
 void FPSCounter::draw(sf::RenderWindow* target_window)
@@ -26,16 +25,8 @@ void FPSCounter::draw(sf::RenderWindow* target_window)
 	target_window->draw(*m_stats_text);
 }
 
-void FPSCounter::updateFPS(sf::Time time_elapsed)
+void FPSCounter::updateFPS(float averageFPS)
 {
-	this->m_update_time += time_elapsed;
-
-	if (this->m_update_time >= sf::seconds(0.25f))
-	{
-		float fps = static_cast<float>(m_frames_passed) / m_update_time.asSeconds();
-		this->m_stats_text->setString("FPS: " + std::to_string(static_cast<int>(fps)));
-
-		this->m_update_time = sf::seconds(0.0f);
-	}
+	this->m_stats_text->setString("FPS: " + std::to_string(static_cast<int>(averageFPS)));
 }
 
