@@ -84,7 +84,7 @@ sf::Texture* TextureManager::getStreamTextureFromList(const int index)
 
 int TextureManager::getNumLoadedStreamTextures() const
 {
-    return 0;
+    return this->m_streaming_texture_list.size();
 }
 
 void TextureManager::instantiateAsTexture(String path, String asset_name, bool is_streaming)

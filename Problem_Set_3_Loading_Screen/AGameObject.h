@@ -20,6 +20,7 @@ public:
 	virtual sf::Vector2f getPosition();
 
 	virtual void setScale(sf::Vector2f scale);
+	virtual sf::Vector2f getScale();
 
 
 protected:

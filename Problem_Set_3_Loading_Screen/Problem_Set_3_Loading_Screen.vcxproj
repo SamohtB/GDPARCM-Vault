@@ -155,6 +155,7 @@
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GenericMonitor.cpp" />
     <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="IconDisplay.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelLoaderMonitor.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GenericMonitor.h" />
     <ClInclude Include="Icon.h" />
+    <ClInclude Include="IconDisplay.h" />
     <ClInclude Include="IETThread.h" />
     <ClInclude Include="IExecutionEvent.h" />
     <ClInclude Include="IFinishedTask.h" />

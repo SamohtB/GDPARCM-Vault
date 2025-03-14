@@ -1,4 +1,5 @@
 #include "GameObjectManager.h"
+#include "AGameObject.h"
 
 GameObjectManager* GameObjectManager::sharedInstance = nullptr;
 
@@ -26,15 +27,15 @@ void GameObjectManager::destroy()
 
 void GameObjectManager::processInput(const std::optional<sf::Event> event)
 {
-    for (AGameObject* obj : m_object_list)
+    for (int i = 0; i < this->m_object_list.size(); i++)
     {
-        obj->processInput(event);
+        this->m_object_list[i]->processInput(event);
     }
 }
 
 void GameObjectManager::update(sf::Time delta_time)
 {
-    for (int i = 0; i < this->m_object_list.size(); i++) 
+    for (int i = 0; i < this->m_object_list.size(); i++)
     {
         this->m_object_list[i]->update(delta_time);
     }
@@ -42,89 +43,74 @@ void GameObjectManager::update(sf::Time delta_time)
 
 void GameObjectManager::draw(sf::RenderWindow* window)
 {
-    for (AGameObject* obj : m_object_list)
+    for (int i = 0; i < this->m_object_list.size(); i++)
     {
-        obj->draw(window);
+        this->m_object_list[i]->draw(window);
     }
 }
 
 void GameObjectManager::addGameObject(AGameObject* game_object)
 {
-    m_object_list.push_back(game_object);
+    m_object_list.insert(m_object_list.begin(), game_object);
+    m_object_table[game_object->getName()] = game_object;
+}
+
+void GameObjectManager::addGameObjectBehind(AGameObject* game_object)
+{
+    m_object_list.insert(m_object_list.begin(), game_object);
     m_object_table[game_object->getName()] = game_object;
 }
 
 void GameObjectManager::deleteObject(AGameObject* game_object)
 {
-    if (this->m_object_table[game_object->getName()] != nullptr)
+    auto it = m_object_table.find(game_object->getName());
+    if (it == m_object_table.end())
     {
-        this->m_object_table.erase(game_object->getName());
-
-        int index = -1;
-        for (int i = 0; i < this->m_object_list.size(); i++)
-        {
-            if (this->m_object_list[i] == game_object)
-            {
-                index = i;
-                break;
-            }
-        }
-
-        if (index != -1)
-        {
-            this->m_object_list.erase(this->m_object_list.begin() + index);
-        }
-        else
-        {
-            std::cerr << game_object->getName() << " not found and deleted" << std::endl;
-        }
+        std::cerr << "Object " << game_object->getName() << " not found in table." << std::endl;
+        return;
     }
+
+    auto objIt = std::find_if(m_object_list.begin(), m_object_list.end(),
+        [&](AGameObject* obj) { return obj == game_object; });
+
+    if (objIt != m_object_list.end())
+    {
+        m_object_list.erase(objIt);
+    }
+
+    m_object_table.erase(it);
 }
 
 void GameObjectManager::deleteObjectByName(String name)
 {
-    if (this->m_object_table[name] != nullptr)
+    auto it = m_object_table.find(name);
+    if (it == m_object_table.end())
     {
-        int index = -1;
-        for (int i = 0; i < this->m_object_list.size(); i++)
-        {
-            if (this->m_object_list[i] == this->m_object_table[name])
-            {
-                index = i;
-                break;
-            }
-        }
-
-        this->m_object_table.erase(name);
-
-        if (index != -1)
-        {
-            this->m_object_list.erase(this->m_object_list.begin() + index);
-        }
-        else
-        {
-            std::cerr << name << " not found and deleted" << std::endl;
-        }
+        std::cerr << "Object " << name << " not found in table." << std::endl;
+        return;
     }
+
+    auto objIt = std::find_if(m_object_list.begin(), m_object_list.end(),
+        [&](AGameObject* obj) { return obj->getName() == name; });
+
+    if (objIt != m_object_list.end())
+    {
+        m_object_list.erase(objIt);
+    }
+
+    m_object_table.erase(it);
 }
 
 void GameObjectManager::clearAllObjects()
 {
-    for (AGameObject* object : this->m_object_list)
-    {
-        delete object;
-    }
-
     this->m_object_table.clear();
     this->m_object_list.clear();
 }
 
 AGameObject* GameObjectManager::findObjectByName(String name)
 {
-    if (this->m_object_table[name] != nullptr)
-    {
-        return this->m_object_table[name];
-    }
+    auto it = m_object_table.find(name);
+    return (it != m_object_table.end()) ? it->second : nullptr;
 
     std::cerr << name << " not found" << std::endl;
 }

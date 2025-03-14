@@ -38,7 +38,8 @@ void LevelLoader::run()
     {
         auto path = entry.path().generic_string();
         this->levelLoaderMonitor->increment();
-        StreamAssetLoader* assetLoader = new StreamAssetLoader(path, this->textureMonitor, this->levelLoaderMonitor);
+        StreamAssetLoader* assetLoader = new StreamAssetLoader(path, 
+            this->textureMonitor, this->levelLoaderMonitor);
         this->threadPool->scheduleTask(assetLoader);
 
         assetCount++;
@@ -48,8 +49,7 @@ void LevelLoader::run()
     {
         this->levelLoaderMonitor->tryEnter();
     }
-   
-    /* add what to do when loading is complete */
+
     this->threadPool->stopScheduler();
     this->executionEvent->onFinishedExecution();
 

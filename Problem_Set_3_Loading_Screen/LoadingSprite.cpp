@@ -29,8 +29,6 @@ LoadingSprite::LoadingSprite(LevelLoader* tracker) : AGameObject("Loading Sprite
 
 LoadingSprite::~LoadingSprite()
 {
-	delete this->fillShader;
-	delete this->m_sprite;
 }
 
 void LoadingSprite::processInput(const std::optional<sf::Event> event)

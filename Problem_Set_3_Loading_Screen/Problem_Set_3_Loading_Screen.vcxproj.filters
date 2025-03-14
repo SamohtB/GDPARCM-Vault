@@ -52,6 +52,9 @@
     <ClCompile Include="LoadingOrb.cpp">
       <Filter>Entities\LoadingBar</Filter>
     </ClCompile>
+    <ClCompile Include="IconDisplay.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="LoadingOrb.h">
       <Filter>Entities\LoadingBar</Filter>
+    </ClInclude>
+    <ClInclude Include="IconDisplay.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

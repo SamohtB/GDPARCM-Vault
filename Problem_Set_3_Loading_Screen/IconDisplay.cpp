@@ -1,46 +1,76 @@
 #include "IconDisplay.h"
 #include "GameObjectManager.h"
 #include "TextureManager.h"
+#include "config.h"
+#include <corecrt_math_defines.h>
 
-IconDisplay::IconDisplay() : AGameObject("Icon Display") {}
+IconDisplay::IconDisplay() : AGameObject("Icon Display") 
+{
+    m_card_scale = static_cast<float>(WINDOW_HEIGHT) / (MAX_ROW * 1017);
+    m_scaled_width = 727.0f * m_card_scale;
+    m_scaled_height = 1017.0f * m_card_scale;
+
+    MAX_COLUMN = static_cast<int>(275 / MAX_ROW);
+
+	spawnAllIcons();
+
+    m_max_scroll = std::max(0.0f, (m_icon_list.size() / MAX_ROW) * m_scaled_width - WINDOW_WIDTH);
+}
 
 void IconDisplay::processInput(const std::optional<sf::Event> event) {}
 
 void IconDisplay::update(sf::Time delta_time)
 {
-	this->m_ticks += delta_time.asSeconds();
+    this->m_ticks += delta_time.asSeconds();
 
-	if (this->m_ticks >= SPAWN_TIME)
-	{
-		spawnObject();
-		this->m_ticks = 0.f;
-	}
+    float period = 60.0f;
+    float t = std::fmod(this->m_ticks / period, 1.0f);
+
+    offsetX = m_max_scroll * (0.5f * (1 - std::cos(t * M_PI)));
+
+    for (size_t i = 0; i < m_icon_list.size(); ++i) {
+        int row = i / MAX_COLUMN;
+        int col = i % MAX_COLUMN;
+
+        float x = (col * m_scaled_width) - offsetX;
+        float y = row * m_scaled_height;
+
+        m_icon_list[i]->setPosition({ x, y });
+    }
 }
 
-void IconDisplay::spawnObject()
+void IconDisplay::spawnObject(int id)
 {
-	int current_icon_count = static_cast<int>(this->m_icon_list.size());
+    String objectName = "Icon_" + std::to_string(id);
+    Icon* icon = new Icon(objectName, id);
+    this->m_icon_list.push_back(icon);
 
-	TextureManager::getInstance()->loadSingleAsset(current_icon_count);
+    icon->setScale({ m_card_scale , m_card_scale });
 
-	String objectName = "Icon_" + std::to_string(current_icon_count);
-	Icon* icon = new Icon(objectName, current_icon_count);
-	this->m_icon_list.push_back(icon);
+    float x = this->m_column_grid * m_scaled_width;
+    float y = this->m_row_grid * m_scaled_height;
+    icon->setPosition({ x, y });
 
-	int IMG_WIDTH = 68; int IMG_HEIGHT = 68;
-	float x = this->m_column_grid * IMG_WIDTH;
-	float y = this->m_row_grid * IMG_HEIGHT;
-	icon->setPosition({ x, y });
+    this->m_column_grid++;
 
-	std::cout << "Set position: " << x << " " << y << std::endl;
+    if (m_column_grid == WINDOW_WIDTH)
+    {
+        this->m_column_grid = 0;
+        this->m_row_grid++;
+    }
 
-	this->m_column_grid++;
+    GameObjectManager::getInstance()->addGameObjectBehind(icon);
+}
 
-	if (this->m_column_grid == this->MAX_COLUMN)
-	{
-		this->m_column_grid = 0;
-		this->m_row_grid++;
-	}
+void IconDisplay::spawnAllIcons()
+{
+    this->m_column_grid = 0;
+    this->m_row_grid = 0;
 
-	GameObjectManager::getInstance()->addGameObject(icon);
+    int count = TextureManager::getInstance()->getNumLoadedStreamTextures();
+
+    for (int i = 0; i < count; i++) 
+    {
+        spawnObject(i);
+    }
 }

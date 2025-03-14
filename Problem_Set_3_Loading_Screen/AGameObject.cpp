@@ -43,3 +43,8 @@ void AGameObject::setScale(sf::Vector2f scale)
 		this->m_sprite->setScale(scale);
 	}
 }
+
+sf::Vector2f AGameObject::getScale()
+{
+	return this->m_scale;
+}

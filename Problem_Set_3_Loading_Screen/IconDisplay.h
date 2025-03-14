@@ -14,14 +14,18 @@ private:
 	IconList m_icon_list;
 
 	float m_ticks = 0.0f;
-	const float SPAWN_TIME = 1.f;
 
 	int m_column_grid = 0; int m_row_grid = 0;
+	int MAX_COLUMN = 0;
+	const int MAX_ROW = 5;
+	const float SCROLL_SPEED = 500.0f;
 
-	const int MAX_COLUMN = 28;
-	const int MAX_ROW = 22;
+	float offsetX = 0.0f;
+	float m_card_scale = 0;
+	float m_scaled_width = 0;
+	float m_scaled_height = 0;
+	float m_max_scroll = 0;
 
-	void spawnObject();
+	void spawnObject(int id);
+	void spawnAllIcons();
 };
-
-

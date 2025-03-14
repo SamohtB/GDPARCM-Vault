@@ -5,6 +5,7 @@
 #include "LevelLoader.h"
 
 #include "Icon.h"
+#include "IconDisplay.h"
 #include "LoadingSprite.h"
 
 Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), WINDOW_TITLE, sf::Style::Close, sf::State::Fullscreen)
@@ -12,17 +13,22 @@ Game::Game() : m_window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), WINDOW_TIT
 	GameObjectManager::initialize();
 	TextureManager::initialize();
 
+	/* Create Level Loader Thread*/
 	this->levelLoader = new LevelLoader(this);
 
-	/* add interactive loader assets here */
-	LoadingSprite* loader = new LoadingSprite(levelLoader);
+	/* interactive Loading Screen here */
+	this->loader = new LoadingSprite(levelLoader);
 	GameObjectManager::getInstance()->addGameObject(loader);
 
+	/* Start Level Loader Thread*/
 	levelLoader->start();
 }
 
 Game::~Game() 
 {
+	delete this->levelLoader;
+	delete this->loader;
+
 	GameObjectManager::destroy();
 	TextureManager::destroy();
 }
@@ -70,6 +76,11 @@ void Game::processEvents()
 		{
 			m_window.close();
 		}
+		else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+		{
+			if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
+				m_window.close();
+		}
 
 		GameObjectManager::getInstance()->processInput(event);
 	}
@@ -83,4 +94,9 @@ void Game::onClose(const sf::Event::Closed&)
 void Game::onFinishedExecution()
 {
 	std::cout << "Level Loaded" << std::endl;
+
+	IconDisplay* display = new IconDisplay();
+	GameObjectManager::getInstance()->addGameObject(display);
+
+	GameObjectManager::getInstance()->deleteObject(this->loader);
 }

@@ -6,6 +6,7 @@
 #include "IExecutionEvent.h"
 
 class LevelLoader;
+class LoadingSprite;
 
 class Game : public IExecutionEvent
 {
@@ -27,5 +28,6 @@ private:
 	void onClose(const sf::Event::Closed&);
 
 	LevelLoader* levelLoader = nullptr;
+	LoadingSprite* loader = nullptr;
 };
 

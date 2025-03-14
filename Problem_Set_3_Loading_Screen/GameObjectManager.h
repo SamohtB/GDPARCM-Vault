@@ -21,6 +21,7 @@ public:
     void draw(sf::RenderWindow* window);
 
     void addGameObject(AGameObject* game_object);
+    void addGameObjectBehind(AGameObject* game_object);
     void deleteObject(AGameObject* game_object);
     void deleteObjectByName(String name);
     void clearAllObjects();
